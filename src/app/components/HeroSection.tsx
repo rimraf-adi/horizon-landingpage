@@ -1,4 +1,3 @@
-import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { ArrowRight, Play, CandlestickChart, ShieldAlert, Layers3 } from "lucide-react";
 import { motion } from "framer-motion";
@@ -22,7 +21,6 @@ export function HeroSection() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
           <motion.div variants={fadeUp} initial="hidden" animate="visible" transition={{ duration: 0.55, ease: "easeOut" }}>
-            <Badge variant="secondary" className="mb-6">PRD v1.0 aligned: session + behavior + capital cockpit</Badge>
             <h1 className="text-3xl sm:text-4xl md:text-6xl tracking-tight mb-6 max-w-2xl">
               Make better trading decisions with one cockpit
             </h1>
