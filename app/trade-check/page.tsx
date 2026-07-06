@@ -797,8 +797,8 @@ export default function TradeCheckPage() {
                                 ]}
                                 cx="50%"
                                 cy="50%"
-                                innerRadius={75}
-                                outerRadius={90}
+                                innerRadius="60%"
+                                outerRadius="80%"
                                 paddingAngle={5}
                                 dataKey="value"
                                 stroke="none"
