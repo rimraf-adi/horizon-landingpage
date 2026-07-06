@@ -10,9 +10,13 @@ const USED_IPS_PATH = path.join(process.cwd(), 'data', 'used-ips.json');
 export type RateLimitStatus = 'allowed' | 'ip_used';
 
 function ensureDataDir() {
-  const dataDir = path.dirname(USED_IPS_PATH);
-  if (!fs.existsSync(dataDir)) {
-    fs.mkdirSync(dataDir, { recursive: true });
+  try {
+    const dataDir = path.dirname(USED_IPS_PATH);
+    if (!fs.existsSync(dataDir)) {
+      fs.mkdirSync(dataDir, { recursive: true });
+    }
+  } catch (error) {
+    console.warn('[Rate Limiter] Failed to create data dir (likely read-only filesystem):', error);
   }
 }
 
@@ -41,7 +45,11 @@ export function markIPUsed(ip: string): void {
   const normalized = ip.trim();
   if (!ips.includes(normalized)) {
     ips.push(normalized);
-    fs.writeFileSync(USED_IPS_PATH, JSON.stringify(ips, null, 2), 'utf-8');
+    try {
+      fs.writeFileSync(USED_IPS_PATH, JSON.stringify(ips, null, 2), 'utf-8');
+    } catch (error) {
+      console.warn('[Rate Limiter] Failed to write IP file (likely read-only filesystem):', error);
+    }
   }
 }
 
@@ -63,12 +71,16 @@ export function storeSubmission(data: {
   provider: string;
   keyIndex: number;
 }): void {
-  const submissionsDir = path.join(process.cwd(), 'data', 'submissions');
-  if (!fs.existsSync(submissionsDir)) {
-    fs.mkdirSync(submissionsDir, { recursive: true });
-  }
+  try {
+    const submissionsDir = path.join(process.cwd(), 'data', 'submissions');
+    if (!fs.existsSync(submissionsDir)) {
+      fs.mkdirSync(submissionsDir, { recursive: true });
+    }
 
-  const filename = `${data.timestamp.replace(/[:.]/g, '-')}_${data.email.replace(/[^a-zA-Z0-9]/g, '_')}.json`;
-  const filepath = path.join(submissionsDir, filename);
-  fs.writeFileSync(filepath, JSON.stringify(data, null, 2), 'utf-8');
+    const filename = `${data.timestamp.replace(/[:.]/g, '-')}_${data.email.replace(/[^a-zA-Z0-9]/g, '_')}.json`;
+    const filepath = path.join(submissionsDir, filename);
+    fs.writeFileSync(filepath, JSON.stringify(data, null, 2), 'utf-8');
+  } catch (error) {
+    console.warn('[Trade Check] Failed to store submission (likely read-only filesystem):', error);
+  }
 }
