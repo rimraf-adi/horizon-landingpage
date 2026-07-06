@@ -1,0 +1,78 @@
+{
+  "email": "",
+  "ip": "::ffff:127.0.0.1",
+  "timestamp": "2026-07-06T16:21:45.622Z",
+  "accountContext": {
+    "firmName": "Funded Trader",
+    "phase": "Funded",
+    "accountSize": 5000,
+    "maxDailyLossPercent": 5,
+    "maxDrawdownPercent": 10,
+    "profitTargetPercent": 10
+  },
+  "questionnaire": {
+    "moveStopLoss": "Never",
+    "increaseSizeAfterWin": "No",
+    "reenterAfterLoss": "No",
+    "maxTradesPerDay": "6",
+    "setupConsistency": "Improvise",
+    "useJournal": "Basic notes",
+    "tradeDuringNews": "Always",
+    "holdOvernight": "Occasionally"
+  },
+  "stats": {
+    "totalTrades": 300,
+    "winningTrades": 204,
+    "losingTrades": 96,
+    "winRate": 68,
+    "averageWin": 175.04240196078413,
+    "averageLoss": -79.76270833333334,
+    "averageRR": 2.1945393482537106,
+    "maxSingleDayLoss": 0,
+    "maxSingleDayLossDate": "",
+    "daysWithin10PercentOfDailyLimit": 0,
+    "lotSizeVarianceWins": 0.4623413986284175,
+    "lotSizeVarianceLosses": 0.375094736842105,
+    "avgLotSizeWins": 0.5306862745098039,
+    "avgLotSizeLosses": 0.4150000000000003,
+    "avgTimeGapAfterLoss": 5.75,
+    "tradesPerDayAvg": 100,
+    "tradesPerDayMax": 133,
+    "tradesPerDayMaxDate": "2026-05-16",
+    "totalPnl": 28051.43,
+    "largestWin": 348.78,
+    "largestLoss": -178.74,
+    "profitFactor": 4.663396115039135,
+    "tradingDays": 3,
+    "instrumentsTraded": [
+      "EURUSD",
+      "AUDUSD",
+      "USDJPY",
+      "NAS100",
+      "XAUUSD",
+      "GBPUSD"
+    ],
+    "longestWinStreak": 9,
+    "longestLoseStreak": 4,
+    "pnlSeries": [
+      {
+        "date": "2026-05-15",
+        "dailyPnl": 9106.419999999998,
+        "cumulativePnl": 9106.419999999998
+      },
+      {
+        "date": "2026-05-16",
+        "dailyPnl": 13102.19,
+        "cumulativePnl": 22208.61
+      },
+      {
+        "date": "2026-05-17",
+        "dailyPnl": 5842.820000000002,
+        "cumulativePnl": 28051.430000000004
+      }
+    ]
+  },
+  "llmResponse": "{\n  \"overallScore\": 82,\n  \"overallVerdict\": \"You've demonstrated strong risk management and a high win rate, but overtrading is a significant concern with 100 trades per day on average.\",\n  \"sections\": [\n    {\n      \"id\": \"risk_management\",\n      \"title\": \"Risk Management & Position Sizing\",\n      \"severity\": \"good\",\n      \"score\": 85,\n      \"summary\": \"Strong risk control\",\n      \"detail\": \"You've managed to keep your daily losses well below the 5% limit, with 0 days within 10% of the daily loss limit, and your average risk reward ratio is 2.19, indicating a good balance between risk and potential gain. Your average lot size on wins is 0.53, and on losses is 0.42, showing some consistency in position sizing.\"\n    },\n    {\n      \"id\": \"prop_firm_compliance\",\n      \"title\": \"Prop Firm Compliance\",\n      \"severity\": \"good\",\n      \"score\": 95,\n      \"summary\": \"Compliant with firm rules\",\n      \"detail\": \"You were within 0% of your daily loss limit on all trading days, and your max drawdown was well below the 10% limit, indicating strong compliance with the prop firm's rules. This discipline is crucial for long-term success.\"\n    },\n    {\n      \"id\": \"win_rate_expectancy\",\n      \"title\": \"Win Rate & Expectancy\",\n      \"severity\": \"good\",\n      \"score\": 90,\n      \"summary\": \"High win rate and expectancy\",\n      \"detail\": \"Your win rate is 68.0%, with an average win of $175.04 and an average loss of $-79.76, resulting in a profit factor of 4.66. This indicates a strong expectancy and a high likelihood of long-term profitability, given your current strategy and performance.\"\n    },\n    {\n      \"id\": \"lot_size_consistency\",\n      \"title\": \"Lot Size Consistency\",\n      \"severity\": \"warning\",\n      \"score\": 60,\n      \"summary\": \"Some inconsistency in lot sizing\",\n      \"detail\": \"You said you don't increase size after a win, but your average lot size on wins is 0.53, which is 26% larger than your average lot size on losses (0.42). This discrepancy suggests some inconsistency in your position sizing approach, which may impact your overall risk management.\"\n    },\n    {\n      \"id\": \"trade_timing\",\n      \"title\": \"Trade Timing & Overtrading\",\n      \"severity\": \"danger\",\n      \"score\": 20,\n      \"summary\": \"Overtrading is a significant issue\",\n      \"detail\": \"You've averaged 100 trades per day, with a maximum of 133 trades in a single day, indicating a high level of overtrading. This, combined with an average of only 5.8 minutes before the next trade after a loss, suggests a lack of patience and a potential for significant losses if your strategy falters.\"\n    },\n    {\n      \"id\": \"behavioral_flags\",\n      \"title\": \"Behavioral Red Flags\",\n      \"severity\": \"warning\",\n      \"score\": 50,\n      \"summary\": \"Overtrading and improvising setups\",\n      \"detail\": \"Your self-reported behavior indicates that you improvise your setups and trade during news events, which can increase the risk of overtrading and impulsive decisions. This, combined with your high trade frequency, is a concerning pattern that may lead to significant losses if not addressed.\"\n    },\n    {\n      \"id\": \"drawdown_recovery\",\n      \"title\": \"Drawdown Recovery\",\n      \"severity\": \"info\",\n      \"score\": null,\n      \"summary\": \"Insufficient data\",\n      \"detail\": \"Given the limited trading days (3 days) and the lack of detailed drawdown data, it's difficult to assess your ability to recover from significant losses. More data is needed to evaluate this aspect of your trading performance.\"\n    },\n    {\n      \"id\": \"discipline\",\n      \"title\": \"Discipline vs Strategy\",\n      \"severity\": \"warning\",\n      \"score\": 55,\n      \"summary\": \"Inconsistent discipline\",\n      \"detail\": \"Your self-reported behavior indicates that you improvise your setups, which may lead to inconsistent discipline in your trading approach. This, combined with your high trade frequency and overtrading, suggests a need for more structure and discipline in your trading strategy.\"\n    },\n    {\n      \"id\": \"recommendations\",\n      \"title\": \"Key Recommendation\",\n      \"severity\": \"info\",\n      \"score\": null,\n      \"summary\": \"Reduce trades per day\",\n      \"detail\": \"Based on your high trade frequency and overtrading, it's essential to reduce your average trades per day to 20 or fewer, focusing on higher-quality setups and more patient trading decisions. This will help you avoid impulsive decisions and reduce your overall risk exposure.\"\n    },\n    {\n      \"id\": \"readiness_score\",\n      \"title\": \"Payout Readiness\",\n      \"severity\": \"good\",\n      \"score\": 85,\n      \"summary\": \"Ready for payout\",\n      \"detail\": \"Given your strong compliance with the prop firm's rules, high win rate, and solid risk management, you appear to be ready for payout. However, addressing the overtrading issue and improving your discipline will be crucial for long-term success and consistent payouts.\"\n    }\n  ]\n}",
+  "provider": "groq",
+  "keyIndex": 0
+}

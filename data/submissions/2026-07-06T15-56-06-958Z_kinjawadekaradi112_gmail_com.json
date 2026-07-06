@@ -1,0 +1,61 @@
+{
+  "email": "kinjawadekaradi112@gmail.com",
+  "ip": "::ffff:127.0.0.1",
+  "timestamp": "2026-07-06T15:56:06.958Z",
+  "accountContext": {
+    "firmName": "The5%ers",
+    "phase": "Verification",
+    "accountSize": 5000,
+    "maxDailyLossPercent": 4,
+    "maxDrawdownPercent": 6,
+    "profitTargetPercent": 6
+  },
+  "questionnaire": {
+    "moveStopLoss": "Sometimes",
+    "increaseSizeAfterWin": "Yes",
+    "reenterAfterLoss": "No",
+    "maxTradesPerDay": "4",
+    "setupConsistency": "Improvise",
+    "tradeDuringNews": "Never",
+    "useJournal": "Basic notes",
+    "holdOvernight": "Never"
+  },
+  "stats": {
+    "totalTrades": 300,
+    "winningTrades": 204,
+    "losingTrades": 96,
+    "winRate": 68,
+    "averageWin": 175.04240196078413,
+    "averageLoss": -79.76270833333334,
+    "averageRR": 2.1945393482537106,
+    "maxSingleDayLoss": 0,
+    "maxSingleDayLossDate": "",
+    "daysWithin10PercentOfDailyLimit": 0,
+    "lotSizeVarianceWins": 0.4623413986284175,
+    "lotSizeVarianceLosses": 0.375094736842105,
+    "avgLotSizeWins": 0.5306862745098039,
+    "avgLotSizeLosses": 0.4150000000000003,
+    "avgTimeGapAfterLoss": 5.75,
+    "tradesPerDayAvg": 100,
+    "tradesPerDayMax": 133,
+    "tradesPerDayMaxDate": "2026-05-16",
+    "totalPnl": 28051.43,
+    "largestWin": 348.78,
+    "largestLoss": -178.74,
+    "profitFactor": 4.663396115039135,
+    "tradingDays": 3,
+    "instrumentsTraded": [
+      "EURUSD",
+      "AUDUSD",
+      "USDJPY",
+      "NAS100",
+      "XAUUSD",
+      "GBPUSD"
+    ],
+    "longestWinStreak": 9,
+    "longestLoseStreak": 4
+  },
+  "llmResponse": "1. RISK MANAGEMENT & POSITION SIZING\nThe trader's average risk per trade is not directly provided, but their max daily loss limit is $200.00, which is 4% of their $5000 account size. Their average lot size on wins (0.53) is larger than on losses (0.42), indicating a potential issue with position sizing consistency. The lot size variance on wins (0.4623) is also higher than on losses (0.3751), suggesting some inconsistency in risk management.\n\n2. PROP FIRM COMPLIANCE & VIOLATION RISK\nThe trader has not come close to their daily loss limit, with 0 days within 10% of the limit. Their max single day loss is $0.00, indicating no major losses. They are well within their daily loss limit of 4% and drawdown limit of 6%.\n\n3. WIN RATE, EXPECTANCY & R:R QUALITY\nThe trader's win rate is 68.0%, with an average win of $175.04 and an average loss of -$79.76. Their average risk-reward ratio is 2.19, which is a positive indicator. The expectancy (win rate × avg win vs loss rate × avg loss) is mathematically sustainable, with a profit factor of 4.66.\n\n4. LOT SIZE CONSISTENCY (sizing behavior)\nThe trader reported increasing size after wins, which is consistent with the data showing an average lot size on wins (0.53) larger than on losses (0.42). However, the variance in lot sizing on wins (0.4623) is higher than on losses (0.3751), indicating some inconsistency in sizing behavior.\n\n5. TRADE TIMING & OVERTRADING PATTERNS\nThe trader's average trades per day is 100.0, with a maximum of 133 trades on a single day (2026-05-16). The average minutes before the next trade after a loss is 5.8 minutes, indicating a potential overtrading pattern.\n\n6. BEHAVIORAL RED FLAGS\nThe most concerning behavioral pattern is the trader's tendency to increase size after wins, which can lead to over-leveraging and significant losses if a losing streak occurs. This is exacerbated by their high average trades per day and short time gap between trades after a loss.\n\n7. DRAWDOWN RECOVERY BEHAVIOR\nThe data does not provide a clear picture of the trader's drawdown recovery behavior, as the largest losses and subsequent trades are not detailed.\n\n8. DISCIPLINE VS STATED STRATEGY\nThe trader reported an \"Improvise\" setup consistency, which may be inconsistent with their relatively high win rate and profit factor. The variance in lot sizing and risk-reward ratio suggests some discipline in their trading approach, but the improvisational nature of their strategy may lead to inconsistencies.\n\n9. LOSS-REDUCTION RECOMMENDATIONS\nTo reduce losses, the trader should consider capping their average lot size on wins to 0.45, which is closer to their average lot size on losses (0.42), to maintain consistency in position sizing and risk management.\n\n10. PAYOUT-READINESS SCORE\nGiven the trader's compliance with The5%ers' rules and their consistent performance, I would give them a payout-readiness score of 85, based on their ability to manage risk and maintain a high win rate while adhering to the firm's guidelines.\n\nOverall verdict: The trader demonstrates a strong ability to manage risk and maintain a high win rate, but their tendency to increase size after wins and overtrade may lead to significant losses if not addressed, highlighting the need for more consistent position sizing and risk management strategies.",
+  "provider": "groq",
+  "keyIndex": 0
+}

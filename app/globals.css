@@ -1,0 +1,7 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import '../src/styles/default_theme.css';
+@import '../src/styles/globals.css';
+
+/* Keep original HTML meta styles */
+html, body { height: 100%; margin: 0; }

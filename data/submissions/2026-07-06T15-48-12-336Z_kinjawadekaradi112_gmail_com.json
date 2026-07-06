@@ -1,0 +1,61 @@
+{
+  "email": "kinjawadekaradi112@gmail.com",
+  "ip": "::ffff:127.0.0.1",
+  "timestamp": "2026-07-06T15:48:12.336Z",
+  "accountContext": {
+    "firmName": "Funded Trader",
+    "phase": "Verification",
+    "accountSize": 5000,
+    "maxDailyLossPercent": 3,
+    "maxDrawdownPercent": 10,
+    "profitTargetPercent": 10
+  },
+  "questionnaire": {
+    "moveStopLoss": "Often",
+    "increaseSizeAfterWin": "No",
+    "reenterAfterLoss": "No",
+    "maxTradesPerDay": "3",
+    "setupConsistency": "Consistent",
+    "useJournal": "Basic notes",
+    "tradeDuringNews": "Sometimes",
+    "holdOvernight": "Never"
+  },
+  "stats": {
+    "totalTrades": 300,
+    "winningTrades": 204,
+    "losingTrades": 96,
+    "winRate": 68,
+    "averageWin": 175.04240196078413,
+    "averageLoss": -79.76270833333334,
+    "averageRR": 2.1945393482537106,
+    "maxSingleDayLoss": 0,
+    "maxSingleDayLossDate": "",
+    "daysWithin10PercentOfDailyLimit": 0,
+    "lotSizeVarianceWins": 0.4623413986284175,
+    "lotSizeVarianceLosses": 0.375094736842105,
+    "avgLotSizeWins": 0.5306862745098039,
+    "avgLotSizeLosses": 0.4150000000000003,
+    "avgTimeGapAfterLoss": 5.75,
+    "tradesPerDayAvg": 100,
+    "tradesPerDayMax": 133,
+    "tradesPerDayMaxDate": "2026-05-16",
+    "totalPnl": 28051.43,
+    "largestWin": 348.78,
+    "largestLoss": -178.74,
+    "profitFactor": 4.663396115039135,
+    "tradingDays": 3,
+    "instrumentsTraded": [
+      "EURUSD",
+      "AUDUSD",
+      "USDJPY",
+      "NAS100",
+      "XAUUSD",
+      "GBPUSD"
+    ],
+    "longestWinStreak": 9,
+    "longestLoseStreak": 4
+  },
+  "llmResponse": "## 1. Overall Verdict\nThe trader's current performance indicates a high win rate and significant total profit, but their trading behavior and risk management raise concerns. With an average of 100 trades per day and a maximum of 133 trades in a single day, the trader's activity level is extremely high, potentially leading to overtrading and increased risk. The large discrepancy between their self-reported behavior and actual trading statistics also warrants attention.\n\n## 2. The Brutal Truth: Where You Are Going Wrong\nThe trader's biggest mathematical flaw lies in their extremely high trading frequency, with an average of 100 trades per day. This not only increases the likelihood of overtrading but also elevates the risk of significant losses, especially considering the max daily loss limit of $150.00. Although they have not yet reached the daily loss limit, the fact that they have 0 days within 10% of the daily loss limit suggests they are either extremely lucky or their risk management is not as effective as it could be. Furthermore, the large lot size variance on both wins and losses indicates inconsistent risk sizing, which could exacerbate potential losses.\n\nThe trader's behavioral flaws are also concerning, given the mismatch between their self-reported behavior and actual trading data. For instance, they report making a maximum of 3 trades per day, but the actual data shows an average of 100 trades per day, with a maximum of 133 trades in a single day. This discrepancy suggests a lack of discipline and potentially poor trading habits. Additionally, the short average time before the next trade after a loss (5.8 minutes) may indicate impulsive decision-making, which can lead to further losses.\n\n## 3. Prop Firm Failure Risks\nThe trader's current habits and risk management strategies put them at significant risk of failing a prop firm challenge or losing a funded account. Their high trading frequency and inconsistent risk sizing increase the likelihood of hitting the max daily loss limit or exceeding the max drawdown limit. Given their current performance, it is only a matter of time before they experience a significant losing streak, which could quickly deplete their account. The prop firm's rules are in place to protect the firm's capital, and the trader's behavior suggests they are not taking these rules seriously.\n\nThe trader's inability to adhere to their self-reported trading plan and their tendency to overtrade also raise concerns about their ability to manage risk and make disciplined trading decisions. If they cannot demonstrate better risk management and discipline, they will likely fail to meet the prop firm's requirements and may lose their funded account.\n\n## 4. Behavioral Contradictions\nThere is a significant discrepancy between the trader's self-reported behavior and their actual trading statistics. They report making a maximum of 3 trades per day, but the data shows an average of 100 trades per day. This contradiction suggests that the trader either lacks awareness of their actual trading behavior or is not being truthful about their trading habits. This discrepancy is a major concern, as it indicates a lack of discipline and potentially poor trading habits.\n\n## 5. The Roadmap to a Payout\nTo become consistently profitable and secure a payout, the trader needs to make the following changes:\n* **Reduce trading frequency**: The trader must significantly decrease their average trades per day to a more manageable level, allowing for more thoughtful and disciplined trading decisions.\n* **Implement consistent risk sizing**: The trader should aim to reduce the lot size variance on both wins and losses, ensuring that their risk sizing is consistent and aligned with their trading plan.\n* **Increase time between trades after losses**: The trader should increase the average time before the next trade after a loss to at least 30 minutes, allowing for more reflection and reducing impulsive decision-making.\n* **Reconcile self-reported behavior with actual trading data**: The trader must reconcile their self-reported behavior with their actual trading statistics, ensuring that they are aware of and honest about their trading habits, and make adjustments to align their behavior with their trading plan.",
+  "provider": "groq",
+  "keyIndex": 0
+}

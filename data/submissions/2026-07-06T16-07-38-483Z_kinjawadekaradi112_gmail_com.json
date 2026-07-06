@@ -1,0 +1,78 @@
+{
+  "email": "kinjawadekaradi112@gmail.com",
+  "ip": "::ffff:127.0.0.1",
+  "timestamp": "2026-07-06T16:07:38.483Z",
+  "accountContext": {
+    "firmName": "The5%ers",
+    "phase": "Verification",
+    "accountSize": 4444,
+    "maxDailyLossPercent": 4,
+    "maxDrawdownPercent": 6,
+    "profitTargetPercent": 6
+  },
+  "questionnaire": {
+    "moveStopLoss": "Often",
+    "increaseSizeAfterWin": "No",
+    "setupConsistency": "Consistent",
+    "maxTradesPerDay": "4",
+    "reenterAfterLoss": "No",
+    "useJournal": "Basic notes",
+    "tradeDuringNews": "Sometimes",
+    "holdOvernight": "Occasionally"
+  },
+  "stats": {
+    "totalTrades": 300,
+    "winningTrades": 204,
+    "losingTrades": 96,
+    "winRate": 68,
+    "averageWin": 175.04240196078413,
+    "averageLoss": -79.76270833333334,
+    "averageRR": 2.1945393482537106,
+    "maxSingleDayLoss": 0,
+    "maxSingleDayLossDate": "",
+    "daysWithin10PercentOfDailyLimit": 0,
+    "lotSizeVarianceWins": 0.4623413986284175,
+    "lotSizeVarianceLosses": 0.375094736842105,
+    "avgLotSizeWins": 0.5306862745098039,
+    "avgLotSizeLosses": 0.4150000000000003,
+    "avgTimeGapAfterLoss": 5.75,
+    "tradesPerDayAvg": 100,
+    "tradesPerDayMax": 133,
+    "tradesPerDayMaxDate": "2026-05-16",
+    "totalPnl": 28051.43,
+    "largestWin": 348.78,
+    "largestLoss": -178.74,
+    "profitFactor": 4.663396115039135,
+    "tradingDays": 3,
+    "instrumentsTraded": [
+      "EURUSD",
+      "AUDUSD",
+      "USDJPY",
+      "NAS100",
+      "XAUUSD",
+      "GBPUSD"
+    ],
+    "longestWinStreak": 9,
+    "longestLoseStreak": 4,
+    "pnlSeries": [
+      {
+        "date": "2026-05-15",
+        "dailyPnl": 9106.419999999998,
+        "cumulativePnl": 9106.419999999998
+      },
+      {
+        "date": "2026-05-16",
+        "dailyPnl": 13102.19,
+        "cumulativePnl": 22208.61
+      },
+      {
+        "date": "2026-05-17",
+        "dailyPnl": 5842.820000000002,
+        "cumulativePnl": 28051.430000000004
+      }
+    ]
+  },
+  "llmResponse": "1. RISK MANAGEMENT & POSITION SIZING\nThe trader's average risk per trade is not explicitly stated, but their max daily loss limit is $177.76, which is 4% of their $4444 account size. Their average lot size after wins (0.53) is 26% larger than after losses (0.42), which may indicate some inconsistency in position sizing. The trader's account size and max daily loss limit suggest a well-managed risk profile.\n\n2. PROP FIRM COMPLIANCE & VIOLATION RISK\nThe trader has not come close to violating their daily loss limit, with 0 days within 10% of the limit. Their max single day loss is $0.00, indicating no significant daily losses. The trader is well within their daily loss limit of 4% and drawdown limit of 6%.\n\n3. WIN RATE, EXPECTANCY & R:R QUALITY\nThe trader's win rate is 68.0%, with an average win of $175.04 and an average loss of $-79.76. Their average risk-reward ratio is 2.19, which is a positive indicator. The trader's expectancy is approximately $113.51 (0.68 * $175.04 + 0.32 * $-79.76), indicating a mathematically sustainable trading strategy.\n\n4. LOT SIZE CONSISTENCY (sizing behavior)\nThe trader reported not increasing their size after wins, but their average lot size after a win (0.53) is actually 26% larger than after a loss (0.42). This contradicts their self-reported behavior, suggesting some inconsistency in lot sizing.\n\n5. TRADE TIMING & OVERTRADING PATTERNS\nThe trader's busiest trading day was May 16, 2026, with 133 trades. Their average trades per day is 100.0, and they have a max trades in a single day of 133. The trader's average minutes before the next trade after a loss is 5.8 minutes, which may indicate overtrading.\n\n6. BEHAVIORAL RED FLAGS\nThe most concerning behavioral pattern is the trader's tendency to overtrade, with an average of 100 trades per day and a max of 133 trades in a single day. This, combined with their short average time before the next trade after a loss (5.8 minutes), may indicate impulsive trading behavior.\n\n7. DRAWDOWN RECOVERY BEHAVIOR\nThe trader's drawdown recovery behavior cannot be determined from the provided statistics, as there is no information on their drawdowns over time.\n\n8. DISCIPLINE VS STATED STRATEGY\nThe trader reported having a consistent setup, but their lot sizing variance on wins (0.4623) and losses (0.3751) suggests some inconsistency in their trading approach. This may indicate a need for more discipline in their trading strategy.\n\n9. LOSS-REDUCTION RECOMMENDATIONS\nTo reduce losses, the trader should consider capping their average trades per day at 50, which is half of their current average. This could help mitigate overtrading and reduce the risk of significant daily losses.\n\n10. PAYOUT-READINESS SCORE\nGiven the trader's compliance with The5%ers' rules and their consistent trading strategy, I would assign a payout-readiness score of 80. This is based on their ability to manage risk and avoid significant daily losses, but also takes into account their tendency to overtrade and inconsistent lot sizing.\n\nOverall verdict: The trader demonstrates a strong understanding of risk management and has a mathematically sustainable trading strategy, but their tendency to overtrade and inconsistent lot sizing may hinder their long-term success, and addressing these issues could significantly improve their payout-readiness score.",
+  "provider": "groq",
+  "keyIndex": 0
+}
