@@ -13,8 +13,7 @@ const fadeUp = {
 const chips = [
   { label: "London +2.4R", cls: "top-6 left-6" },
   { label: "NY Open -1.1R", cls: "top-10 right-6" },
-  { label: "Revenge Risk High", cls: "bottom-24 left-10" },
-  { label: "Portfolio +$4.2k", cls: "bottom-8 right-10" },
+  { label: "Portfolio +₹4.2k", cls: "bottom-8 right-10" },
 ];
 
 export function HeroSection() {
@@ -24,19 +23,23 @@ export function HeroSection() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
           <motion.div variants={fadeUp} initial="hidden" animate="visible" transition={{ duration: 0.55, ease: "easeOut" }}>
-            <h1 className="text-3xl sm:text-4xl md:text-6xl tracking-tight mb-6 max-w-2xl">
-              Make better trading decisions with one cockpit
+            <p className="text-sm font-semibold tracking-wide text-primary uppercase mb-3">
+              SESSION INTELLIGENCE FOR YOUR TRADE HISTORY
+            </p>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight mb-6 max-w-2xl font-bold">
+              Every trade you take, decoded across 10 domains
             </h1>
             <p className="text-base md:text-lg text-muted-foreground mb-8 max-w-xl">
-              Consolidate prop firm and broker data into session intelligence, behavioral incident detection, and multi-account capital analytics.
+              Upload your prop firm CSV or a single trade. Get institutional-grade analysis on risk, compliance, behavior, and payout-readiness — in seconds, not a spreadsheet.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8">
-              <Link href="/trade-check">
-                <Button size="lg" className="w-full sm:w-auto">
-                  Get Started
+            <div className="flex flex-col mb-8 gap-2">
+              <Link href="/trade-check" className="inline-block">
+                <Button size="lg" className="w-full sm:w-auto text-base">
+                  Run Free Analysis
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
+              <p className="text-xs text-muted-foreground ml-1">No card. No signup to see your score.</p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-xl">
               <div className="rounded-xl border bg-card/90 p-3">

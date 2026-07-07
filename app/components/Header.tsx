@@ -7,13 +7,12 @@ import { BarChart3, Menu } from "lucide-react";
 import { motion } from "framer-motion";
 
 const navItems = [
-  { label: "Pillars", id: "pillars" },
-  { label: "Roadmap", id: "roadmap" },
-  { label: "Plans", id: "pricing" },
+  { label: "How it works", id: "how-it-works" },
+  { label: "Pricing", id: "pricing" },
 ];
 
 export function Header() {
-  const [activeSection, setActiveSection] = useState("pillars");
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     const sections = navItems
@@ -49,7 +48,7 @@ export function Header() {
         <div className="flex items-center gap-4 lg:gap-8">
           <a href="/" className="flex items-center gap-2 font-semibold tracking-tight shrink-0">
             <BarChart3 className="h-5 w-5 text-primary" />
-            <span>Prop Trading Cockpit</span>
+            <span>Trade Audit</span>
           </a>
           <nav className="hidden md:flex items-center gap-1 rounded-full border bg-card/70 p-1 text-sm">
             {navItems.map((item) => {
@@ -85,7 +84,7 @@ export function Header() {
         </div>
         <div className="flex items-center gap-2">
           <Link href="/trade-check">
-            <Button className="hidden sm:inline-flex">Get Started</Button>
+            <Button className="hidden sm:inline-flex">Try it free</Button>
           </Link>
           <Button variant="ghost" size="icon" className="sm:hidden" aria-label="Open navigation menu">
             <Menu className="h-4 w-4" />

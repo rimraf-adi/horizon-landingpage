@@ -8,7 +8,7 @@ export function Footer() {
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <p className="font-semibold mb-3">Prop Trading Cockpit</p>
+            <p className="font-semibold mb-3">Trade Audit</p>
             <p className="text-sm text-muted-foreground max-w-sm">
               Trader-centric analytics for prop firm and broker data: sessions, behavior, and multi-account capital context in one workspace.
             </p>
@@ -31,7 +31,7 @@ export function Footer() {
           </div>
         </div>
         <Separator className="my-6" />
-        <p className="text-sm text-muted-foreground">&copy; 2026 Prop Trading Cockpit. Built from PRD v1.0 (May 14, 2026).</p>
+        <p className="text-sm text-muted-foreground">&copy; 2026 Trade Audit. All rights reserved.</p>
       </div>
     </footer>
   );

@@ -1,13 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { parseTradeCSV, computeStats, buildLLMPayload } from '@/lib/trade-analyzer';
 import { callLLM } from '@/lib/llm-client';
-import { storeSubmission } from '@/lib/rate-limiter';
+import { storeSubmission, checkRateLimit, markIPUsed } from '@/lib/rate-limiter';
 import { sendAnalysisEmail } from '@/lib/email';
 
 export const maxDuration = 60;
 
 export async function POST(request: NextRequest) {
   try {
+    // --- One-time use enforcement ---
+    const clientIP = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
+      || request.headers.get('x-real-ip')
+      || 'unknown';
+
+    const rateStatus = checkRateLimit('', clientIP);
+    if (rateStatus === 'ip_used') {
+      return NextResponse.json(
+        { error: 'You have already used your free analysis. Contact us for additional audits.' },
+        { status: 429 }
+      );
+    }
+
     const formData = await request.formData();
 
     const email = (formData.get('email') as string)?.trim().toLowerCase();
@@ -134,12 +147,13 @@ export async function POST(request: NextRequest) {
       };
     }
 
+    // Mark this IP as used after successful analysis
+    markIPUsed(clientIP);
+
     const timestamp = new Date().toISOString();
     storeSubmission({
       email,
-      ip: request.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
-        || request.headers.get('x-real-ip')
-        || 'unknown',
+      ip: clientIP,
       timestamp,
       accountContext,
       questionnaire,

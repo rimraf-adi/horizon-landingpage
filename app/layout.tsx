@@ -3,8 +3,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Prop Trading Cockpit | Session, Behavior & Multi-Account Analytics',
-  description: 'Trader-centric analytics cockpit for prop firm and broker data. Turn executions into session intelligence, behavioral pattern detection, and multi-account capital allocation insights.',
+  title: 'Trade Audit | Every trade decoded across 10 domains',
+  description: 'Upload your prop firm CSV or a single trade. Get institutional-grade analysis on risk, compliance, behavior, and payout-readiness — in seconds, not a spreadsheet.',
   icons: {
     icon: '/assets/chart-line.svg',
   },
