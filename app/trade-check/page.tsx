@@ -429,7 +429,7 @@ export default function TradeCheckPage() {
             </motion.div>
           )}
 
-          {pageState === 'form' && (
+          {pageState === 'form' && !hasUsedAnalysis && (
             <motion.div
               key="form"
               initial={{ opacity: 0 }}
