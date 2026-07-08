@@ -48,6 +48,7 @@ interface AnalysisResult {
 type PageState = 'form' | 'loading' | 'results' | 'error';
 
 const ANALYSIS_USED_KEY = 'trade_audit_used';
+const REPORT_STORAGE_KEY = 'trade_audit_report';
 
 const QUESTIONNAIRE_ITEMS = [
   {
@@ -109,11 +110,22 @@ export default function TradeCheckPage() {
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [hasUsedAnalysis, setHasUsedAnalysis] = useState(false);
+  const [showFreeTrialPopup, setShowFreeTrialPopup] = useState(false);
 
   useEffect(() => {
     try {
-      if (localStorage.getItem(ANALYSIS_USED_KEY) === 'true') {
+      const used = localStorage.getItem(ANALYSIS_USED_KEY) === 'true';
+      if (used) {
         setHasUsedAnalysis(true);
+      }
+      // Load saved report if exists
+      const savedReport = localStorage.getItem(REPORT_STORAGE_KEY);
+      if (savedReport) {
+        const parsed = JSON.parse(savedReport) as AnalysisResult;
+        setResult(parsed);
+        if (used) {
+          setPageState('results');
+        }
       }
     } catch {}
   }, []);
@@ -219,8 +231,18 @@ export default function TradeCheckPage() {
       try { localStorage.setItem(ANALYSIS_USED_KEY, 'true'); } catch {}
       setHasUsedAnalysis(true);
 
-      setResult({ analysis: data.analysis, stats: data.stats });
+      const analysisResult = { analysis: data.analysis, stats: data.stats };
+      setResult(analysisResult);
+
+      // Save report to localStorage for future viewing
+      try { localStorage.setItem(REPORT_STORAGE_KEY, JSON.stringify(analysisResult)); } catch {}
+
       setPageState('results');
+
+      // Show the free trial popup after a short delay
+      setTimeout(() => {
+        setShowFreeTrialPopup(true);
+      }, 1500);
 
       setTimeout(() => {
         resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -394,11 +416,19 @@ export default function TradeCheckPage() {
                 You&apos;ve already run your one free Trade Audit. For additional reports or ongoing guidance, check out our paid plans.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <Link href="/#pricing">
+                <Link href="/pricing">
                   <button className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-all text-sm">
                     View Pricing
                   </button>
                 </Link>
+                {result && (
+                  <button
+                    onClick={() => setPageState('results')}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border font-medium hover:bg-muted transition-all text-sm"
+                  >
+                    View My Report
+                  </button>
+                )}
               </div>
             </div>
           </motion.div>
@@ -1040,6 +1070,60 @@ export default function TradeCheckPage() {
                   Try Again
                 </button>
               </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Free Trial Popup */}
+        <AnimatePresence>
+          {showFreeTrialPopup && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+              onClick={() => setShowFreeTrialPopup(false)}
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+                className="relative w-full max-w-md rounded-2xl border bg-card p-8 shadow-2xl"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  onClick={() => setShowFreeTrialPopup(false)}
+                  className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+                <div className="text-center">
+                  <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-5">
+                    <CheckCircle className="w-8 h-8 text-primary" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-2">Report generated!</h3>
+                  <p className="text-sm text-muted-foreground mb-1">
+                    That was your <span className="font-semibold text-foreground">one free analysis</span>.
+                  </p>
+                  <p className="text-sm text-muted-foreground mb-6">
+                    For additional reports or ongoing guidance, subscribe to a paid plan.
+                  </p>
+                  <div className="flex flex-col gap-3">
+                    <Link href="/pricing">
+                      <button className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-all">
+                        View Pricing Plans
+                      </button>
+                    </Link>
+                    <button
+                      onClick={() => setShowFreeTrialPopup(false)}
+                      className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border font-medium hover:bg-muted transition-all text-sm"
+                    >
+                      Continue Viewing Report
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
