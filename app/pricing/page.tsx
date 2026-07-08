@@ -9,49 +9,52 @@ import { motion } from 'framer-motion';
 
 const plans = [
   {
-    name: 'Single Report',
+    name: 'Trade Review',
     price: '₹99',
     period: 'one-time',
-    description: 'A complete diagnostic of your trade history',
+    description: 'Manual + AI assisted review of your trades',
     features: [
-      'Full 10-domain analysis',
-      'Payout readiness score',
+      'AI-powered 10-domain analysis',
+      'Manual review by an experienced trader',
       'Risk & compliance cross-check',
       'Behavioral incident detection',
-      'Instant delivery',
+      'Payout readiness score',
+      'Delivered within 24 hours',
     ],
-    cta: 'Get Your Report',
+    cta: 'Get Your Review',
     popular: false,
   },
   {
-    name: 'Full Guidance',
+    name: '1:1 Personal Guidance',
     price: '₹499',
     period: '/month',
-    description: 'For traders who want continuous improvement and support',
+    description: 'Complete personalisation — work directly with me to fix your edge',
     features: [
-      'Everything in Single Report',
-      'Full guidance & support',
-      '1:1 Telegram access',
-      'Annotated charts & breakdowns',
-      'One clear fix per audit',
+      'Everything in Trade Review',
+      'Direct 1:1 chat access (Telegram)',
+      'Completely personalised to YOUR trading style',
+      'Weekly annotated chart reviews',
+      'Custom strategy adjustments',
+      'Ongoing accountability & follow-up',
+      'Priority response — no waiting',
     ],
-    cta: 'Book Pro Audit',
+    cta: 'Start Personal Guidance',
     popular: true,
   },
 ];
 
 const faqs = [
   {
-    q: 'What do I get in a Single Report?',
-    a: 'A full AI-powered analysis of your trade history across 10 domains — risk sizing, compliance, behavioral flags, payout readiness, and more. Delivered instantly as an interactive report you can download as PDF.',
+    q: 'What do I get in a Trade Review?',
+    a: 'A combined manual + AI-powered analysis of your trade history across 10 domains — risk sizing, compliance, behavioral flags, payout readiness, and more. An experienced trader personally reviews your data alongside the AI output. Delivered within 24 hours.',
   },
   {
-    q: 'What does Full Guidance include?',
-    a: 'Everything in the Single Report, plus ongoing 1:1 support via Telegram. Each month you get annotated chart reviews, written breakdowns, and a single clear fix to improve your trading edge.',
+    q: 'What does 1:1 Personal Guidance include?',
+    a: 'Everything in the Trade Review, plus ongoing direct access to me via Telegram. This is completely personalised to your trading style — weekly annotated chart reviews, custom strategy adjustments, and continuous accountability to help you actually improve.',
   },
   {
     q: 'Can I try it before I pay?',
-    a: 'Yes — every user gets one free analysis. After that, you can purchase a Single Report or subscribe to Full Guidance for continued access.',
+    a: 'Yes — every user gets one free AI analysis. After that, you can purchase a Trade Review or subscribe to Personal Guidance for continued access and human insight.',
   },
   {
     q: 'What trade formats do you support?',
