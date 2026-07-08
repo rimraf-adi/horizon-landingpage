@@ -72,16 +72,16 @@ export default function BlogsPage() {
                 <div className="mb-12">
                     <Link
                         href="/"
-                        className="inline-flex items-center gap-2 text-[#6B7280] hover:text-[#059669] transition-colors mb-6"
+                        className="inline-flex items-center gap-2 text-[#6B7280] hover:text-primary transition-colors mb-6"
                     >
                         <ArrowLeft size={16} />
                         Back to Home
                     </Link>
                     <FadeIn>
                         <div className="text-center">
-                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[rgba(5,150,105,0.08)] border border-[rgba(5,150,105,0.2)] mb-6">
-                                <TrendingUp className="w-4 h-4 text-[#059669]" />
-                                <span className="text-sm text-[#059669]">Our Blog</span>
+                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-border mb-6">
+                                <TrendingUp className="w-4 h-4 text-primary" />
+                                <span className="text-sm text-primary">Our Blog</span>
                             </div>
                             <h1 className="text-4xl md:text-5xl font-bold mb-4">
                                 <span className="text-[#111827]">Latest</span>{' '}
@@ -98,7 +98,7 @@ export default function BlogsPage() {
                 {loading ? (
                     <div className="flex items-center justify-center py-16">
                         <div className="flex flex-col items-center gap-4">
-                            <Loader className="animate-spin text-[#059669]" size={40} />
+                            <Loader className="animate-spin text-primary" size={40} />
                             <p className="text-[#6B7280]">Loading articles...</p>
                         </div>
                     </div>
@@ -106,7 +106,7 @@ export default function BlogsPage() {
                     <FadeIn>
                         <div className="text-center py-16">
                             <div className="glass-card p-12 rounded-2xl max-w-lg mx-auto">
-                                <TrendingUp className="w-16 h-16 text-[#059669] mx-auto mb-4" />
+                                <TrendingUp className="w-16 h-16 text-primary mx-auto mb-4" />
                                 <h2 className="text-2xl font-bold text-[#111827] mb-2">No Articles Yet</h2>
                                 <p className="text-[#6B7280]">Fresh financial insights are coming soon. Stay tuned!</p>
                             </div>
@@ -149,7 +149,7 @@ export default function BlogsPage() {
                                                     <div className="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.5)] to-transparent" />
                                                 </div>
                                             ) : (
-                                                <div className="h-3 bg-gradient-to-r from-[#059669] via-[#10B981] to-[#34D399]" />
+                                                <div className="h-3 bg-gradient-to-r from-primary via-primary/80 to-primary/60" />
                                             )}
 
                                             {/* Content area - flex grow to fill remaining space */}
@@ -160,7 +160,7 @@ export default function BlogsPage() {
                                                         {(post.frontmatter.tags as string[]).slice(0, 3).map((tag: string) => (
                                                             <span
                                                                 key={tag}
-                                                                className="px-3 py-1 text-xs rounded-full bg-[rgba(5,150,105,0.08)] text-[#059669] border border-[rgba(5,150,105,0.15)]"
+                                                                className="px-3 py-1 text-xs rounded-full bg-primary/10 text-primary border border-border"
                                                             >
                                                                 {tag}
                                                             </span>
@@ -169,7 +169,7 @@ export default function BlogsPage() {
                                                 )}
 
                                                 {/* Title */}
-                                                <h2 className={`font-bold text-[#111827] group-hover:text-[#059669] transition-colors mb-2 line-clamp-2 ${isLarge ? 'text-xl md:text-2xl' : 'text-lg'}`}>
+                                                <h2 className={`font-bold text-[#111827] group-hover:text-primary transition-colors mb-2 line-clamp-2 ${isLarge ? 'text-xl md:text-2xl' : 'text-lg'}`}>
                                                     {post.frontmatter.title}
                                                 </h2>
 
@@ -179,7 +179,7 @@ export default function BlogsPage() {
                                                 </p>
 
                                                 {/* Meta Info - pushed to bottom */}
-                                                <div className="flex items-center justify-between pt-3 border-t border-[rgba(5,150,105,0.1)] mt-auto">
+                                                <div className="flex items-center justify-between pt-3 border-t border-border mt-auto">
                                                     <div className="flex items-center gap-3 text-xs text-[#6B7280]">
                                                         <span className="flex items-center gap-1">
                                                             <Calendar className="w-3.5 h-3.5" />
@@ -192,7 +192,7 @@ export default function BlogsPage() {
                                                             </span>
                                                         )}
                                                     </div>
-                                                    <ArrowRight className="w-4 h-4 text-[#059669] opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                                                    <ArrowRight className="w-4 h-4 text-primary opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
                                                 </div>
                                             </div>
                                         </article>

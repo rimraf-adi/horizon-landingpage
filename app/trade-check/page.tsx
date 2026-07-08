@@ -304,17 +304,17 @@ export default function TradeCheckPage() {
         <style>
           * { margin: 0; padding: 0; box-sizing: border-box; }
           body { font-family: 'Segoe UI', system-ui, sans-serif; color: #111827; padding: 40px; line-height: 1.6; }
-          .header { text-align: center; margin-bottom: 32px; padding-bottom: 20px; border-bottom: 2px solid #059669; }
-          .header h1 { font-size: 24px; color: #059669; margin-bottom: 4px; }
+          .header { text-align: center; margin-bottom: 32px; padding-bottom: 20px; border-bottom: 2px solid var(--primary); }
+          .header h1 { font-size: 24px; color: var(--primary); margin-bottom: 4px; }
           .header p { font-size: 12px; color: #6B7280; }
-          h2 { color: #059669; font-size: 18px; margin: 24px 0 12px; }
+          h2 { color: var(--primary); font-size: 18px; margin: 24px 0 12px; }
           h3 { font-size: 14px; color: #111827; margin: 16px 0 8px; }
           p { margin-bottom: 10px; font-size: 13px; }
           .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 16px 0; }
           .stat-item { padding: 8px 12px; background: #F8FAF9; border: 1px solid #E5E7EB; border-radius: 6px; }
           .stat-label { font-size: 11px; color: #6B7280; }
           .stat-value { font-size: 14px; font-weight: 600; color: #111827; }
-          .analysis-section { margin: 16px 0; padding: 16px; background: #ECFDF5; border-radius: 8px; border-left: 3px solid #059669; }
+          .analysis-section { margin: 16px 0; padding: 16px; background: #ECFDF5; border-radius: 8px; border-left: 3px solid var(--primary); }
           .footer { margin-top: 40px; text-align: center; font-size: 11px; color: #6B7280; border-top: 1px solid #E5E7EB; padding-top: 16px; }
           @media print { body { padding: 20px; } }
         </style>
@@ -413,7 +413,7 @@ export default function TradeCheckPage() {
         {/* Back link */}
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-[#6B7280] hover:text-[#059669] transition-colors mb-6"
+          className="inline-flex items-center gap-2 text-[#6B7280] hover:text-primary transition-colors mb-6"
         >
           <ArrowLeft size={16} />
           Back to Home
@@ -422,9 +422,9 @@ export default function TradeCheckPage() {
         {/* Header */}
         <FadeIn>
           <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[rgba(5,150,105,0.08)] border border-[rgba(5,150,105,0.2)] mb-6">
-              <Shield className="w-4 h-4 text-[#059669]" />
-              <span className="text-sm text-[#059669]">Free Trade Analysis Tool</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-border mb-6">
+              <Shield className="w-4 h-4 text-primary" />
+              <span className="text-sm text-primary">Free Trade Analysis Tool</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               <span className="text-[#111827]">Trade</span>{' '}
@@ -448,7 +448,7 @@ export default function TradeCheckPage() {
             >
               <div className="glass-card p-12 rounded-2xl text-center max-w-md mx-auto">
                 <div className="relative mb-6">
-                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#059669] to-[#10B981] flex items-center justify-center mx-auto animate-gold-pulse">
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center mx-auto animate-gold-pulse">
                     <BarChart3 className="w-10 h-10 text-white animate-pulse" />
                   </div>
                 </div>
@@ -484,7 +484,7 @@ export default function TradeCheckPage() {
                     href="https://t.me/paisanomics"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-[#059669] to-[#10B981] text-white font-semibold hover:shadow-[0_0_28px_rgba(5,150,105,0.35)] transition-all hover:scale-105"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-primary to-primary/60 text-white font-semibold hover:shadow-[0_0_28px_rgba(5,150,105,0.35)] transition-all hover:scale-105"
                   >
                     <MessageCircle className="w-5 h-5" />
                     Chat on Telegram
@@ -494,7 +494,7 @@ export default function TradeCheckPage() {
                       setPageState('form');
                       setErrorMessage('');
                     }}
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[rgba(5,150,105,0.08)] text-[#059669] font-semibold border border-[rgba(5,150,105,0.2)] hover:bg-[rgba(5,150,105,0.15)] transition-all"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary/10 text-primary font-semibold border border-border hover:bg-primary/10 transition-all"
                   >
                     <ArrowLeft className="w-4 h-4" />
                     Go Back
@@ -524,14 +524,14 @@ export default function TradeCheckPage() {
                     </p>
                     <div className="flex flex-col sm:flex-row gap-3 justify-center">
                       <Link href="/pricing">
-                        <button className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#059669] to-[#10B981] text-white font-medium hover:shadow-[0_0_20px_rgba(5,150,105,0.3)] transition-all text-sm cursor-pointer">
+                        <button className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-primary to-primary/60 text-white font-medium hover:shadow-[0_0_20px_rgba(5,150,105,0.3)] transition-all text-sm cursor-pointer">
                           View Pricing
                         </button>
                       </Link>
                       {result && (
                         <button
                           onClick={() => setPageState('results')}
-                          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl border border-[rgba(5,150,105,0.2)] bg-[rgba(5,150,105,0.04)] text-[#059669] font-medium hover:bg-[rgba(5,150,105,0.08)] transition-all text-sm cursor-pointer"
+                          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl border border-border bg-primary/10 text-primary font-medium hover:bg-primary/10 transition-all text-sm cursor-pointer"
                         >
                           View My Report
                         </button>
@@ -566,7 +566,7 @@ export default function TradeCheckPage() {
                 <FadeIn delay={0.1}>
                   <div className="glass-card rounded-2xl p-8">
                     <div className="flex items-center gap-3 mb-6">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#059669] to-[#10B981] flex items-center justify-center">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center">
                         <Target className="w-5 h-5 text-white" />
                       </div>
                       <div>
@@ -584,7 +584,7 @@ export default function TradeCheckPage() {
                             id="firmName"
                             value={firmName}
                             onChange={(e) => handleFirmChange(e.target.value)}
-                            className="w-full px-4 py-3 rounded-xl bg-white border border-[rgba(5,150,105,0.2)] text-[#111827] focus:outline-none focus:ring-2 focus:ring-[#059669] focus:border-transparent appearance-none cursor-pointer"
+                            className="w-full px-4 py-3 rounded-xl bg-white border border-border text-[#111827] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent appearance-none cursor-pointer"
                             required
                           >
                             <option value="">Select firm...</option>
@@ -598,7 +598,7 @@ export default function TradeCheckPage() {
                             value={customFirm}
                             onChange={(e) => setCustomFirm(e.target.value)}
                             placeholder="Enter firm name..."
-                            className="mt-2 w-full px-4 py-3 rounded-xl bg-white border border-[rgba(5,150,105,0.2)] text-[#111827] focus:outline-none focus:ring-2 focus:ring-[#059669] placeholder:text-[#9CA3AF]"
+                            className="mt-2 w-full px-4 py-3 rounded-xl bg-white border border-border text-[#111827] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] placeholder:text-[#9CA3AF]"
                           />
                         )}
                       </div>
@@ -611,7 +611,7 @@ export default function TradeCheckPage() {
                             id="phase"
                             value={phase}
                             onChange={(e) => setPhase(e.target.value)}
-                            className="w-full px-4 py-3 rounded-xl bg-white border border-[rgba(5,150,105,0.2)] text-[#111827] focus:outline-none focus:ring-2 focus:ring-[#059669] focus:border-transparent appearance-none cursor-pointer"
+                            className="w-full px-4 py-3 rounded-xl bg-white border border-border text-[#111827] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent appearance-none cursor-pointer"
                             required
                           >
                             <option value="">Select phase...</option>
@@ -630,7 +630,7 @@ export default function TradeCheckPage() {
                           value={accountSize}
                           onChange={(e) => setAccountSize(e.target.value)}
                           placeholder="e.g. 100000"
-                          className="w-full px-4 py-3 rounded-xl bg-white border border-[rgba(5,150,105,0.2)] text-[#111827] focus:outline-none focus:ring-2 focus:ring-[#059669] placeholder:text-[#9CA3AF]"
+                          className="w-full px-4 py-3 rounded-xl bg-white border border-border text-[#111827] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] placeholder:text-[#9CA3AF]"
                           required
                           min="1"
                         />
@@ -646,7 +646,7 @@ export default function TradeCheckPage() {
                           value={maxDailyLoss}
                           onChange={(e) => setMaxDailyLoss(e.target.value)}
                           placeholder="e.g. 5"
-                          className="w-full px-4 py-3 rounded-xl bg-white border border-[rgba(5,150,105,0.2)] text-[#111827] focus:outline-none focus:ring-2 focus:ring-[#059669] placeholder:text-[#9CA3AF]"
+                          className="w-full px-4 py-3 rounded-xl bg-white border border-border text-[#111827] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] placeholder:text-[#9CA3AF]"
                           required
                           min="0.1"
                         />
@@ -662,7 +662,7 @@ export default function TradeCheckPage() {
                           value={maxDrawdown}
                           onChange={(e) => setMaxDrawdown(e.target.value)}
                           placeholder="e.g. 10"
-                          className="w-full px-4 py-3 rounded-xl bg-white border border-[rgba(5,150,105,0.2)] text-[#111827] focus:outline-none focus:ring-2 focus:ring-[#059669] placeholder:text-[#9CA3AF]"
+                          className="w-full px-4 py-3 rounded-xl bg-white border border-border text-[#111827] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] placeholder:text-[#9CA3AF]"
                           required
                           min="0.1"
                         />
@@ -678,7 +678,7 @@ export default function TradeCheckPage() {
                           value={profitTarget}
                           onChange={(e) => setProfitTarget(e.target.value)}
                           placeholder="e.g. 10"
-                          className="w-full px-4 py-3 rounded-xl bg-white border border-[rgba(5,150,105,0.2)] text-[#111827] focus:outline-none focus:ring-2 focus:ring-[#059669] placeholder:text-[#9CA3AF]"
+                          className="w-full px-4 py-3 rounded-xl bg-white border border-border text-[#111827] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] placeholder:text-[#9CA3AF]"
                           min="0"
                         />
                       </div>
@@ -690,7 +690,7 @@ export default function TradeCheckPage() {
                 <FadeIn delay={0.2}>
                   <div className="glass-card rounded-2xl p-8">
                     <div className="flex items-center gap-3 mb-6">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#059669] to-[#10B981] flex items-center justify-center">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center">
                         <Upload className="w-5 h-5 text-white" />
                       </div>
                       <div>
@@ -702,8 +702,8 @@ export default function TradeCheckPage() {
                     {/* CSV Upload */}
                     <div
                       onClick={() => fileInputRef.current?.click()}
-                      className={`border-2 border-dashed rounded-2xl p-8 text-center cursor-pointer transition-all hover:border-[#059669] hover:bg-[rgba(5,150,105,0.04)] ${
-                        csvFile ? 'border-[#059669] bg-[rgba(5,150,105,0.04)]' : 'border-[rgba(5,150,105,0.2)]'
+                      className={`border-2 border-dashed rounded-2xl p-8 text-center cursor-pointer transition-all hover:border-[var(--primary)] hover:bg-primary/10 ${
+                        csvFile ? 'border-[var(--primary)] bg-primary/10' : 'border-border'
                       }`}
                     >
                       <input
@@ -715,7 +715,7 @@ export default function TradeCheckPage() {
                       />
                       {csvFile ? (
                         <div className="flex items-center justify-center gap-3">
-                          <CheckCircle className="w-8 h-8 text-[#059669]" />
+                          <CheckCircle className="w-8 h-8 text-primary" />
                           <div className="text-left">
                             <p className="font-medium text-[#111827]">{csvFile.name}</p>
                             <p className="text-sm text-[#6B7280]">{(csvFile.size / 1024).toFixed(1)} KB — Click to replace</p>
@@ -723,7 +723,7 @@ export default function TradeCheckPage() {
                         </div>
                       ) : (
                         <>
-                          <FileText className="w-12 h-12 text-[#059669] mx-auto mb-3 opacity-60" />
+                          <FileText className="w-12 h-12 text-primary mx-auto mb-3 opacity-60" />
                           <p className="font-medium text-[#111827] mb-1">Drop your trade CSV here or click to browse</p>
                           <p className="text-sm text-[#6B7280]">Supports MT4, MT5, and cTrader exports (.csv)</p>
                         </>
@@ -735,8 +735,8 @@ export default function TradeCheckPage() {
                       <label className="block text-sm text-[#6B7280] mb-2">Optional: Upload a dashboard screenshot (for future review)</label>
                       <div
                         onClick={() => screenshotInputRef.current?.click()}
-                        className={`border border-dashed rounded-xl p-4 text-center cursor-pointer transition-all hover:border-[#059669] text-sm ${
-                          screenshotFile ? 'border-[#059669]' : 'border-[rgba(5,150,105,0.15)]'
+                        className={`border border-dashed rounded-xl p-4 text-center cursor-pointer transition-all hover:border-[var(--primary)] text-sm ${
+                          screenshotFile ? 'border-[var(--primary)]' : 'border-border'
                         }`}
                       >
                         <input
@@ -747,7 +747,7 @@ export default function TradeCheckPage() {
                           className="hidden"
                         />
                         {screenshotFile ? (
-                          <span className="text-[#059669]">✓ {screenshotFile.name}</span>
+                          <span className="text-primary">✓ {screenshotFile.name}</span>
                         ) : (
                           <span className="text-[#9CA3AF]">Click to upload screenshot (optional)</span>
                         )}
@@ -760,7 +760,7 @@ export default function TradeCheckPage() {
                 <FadeIn delay={0.3}>
                   <div className="glass-card rounded-2xl p-8">
                     <div className="flex items-center gap-3 mb-6">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#059669] to-[#10B981] flex items-center justify-center">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center">
                         <Brain className="w-5 h-5 text-white" />
                       </div>
                       <div>
@@ -779,7 +779,7 @@ export default function TradeCheckPage() {
                               value={questionnaire[item.key] || ''}
                               onChange={(e) => setQuestionnaire(prev => ({ ...prev, [item.key]: e.target.value }))}
                               placeholder="e.g. 8"
-                              className="w-full max-w-[200px] px-4 py-3 rounded-xl bg-white border border-[rgba(5,150,105,0.2)] text-[#111827] focus:outline-none focus:ring-2 focus:ring-[#059669] placeholder:text-[#9CA3AF]"
+                              className="w-full max-w-[200px] px-4 py-3 rounded-xl bg-white border border-border text-[#111827] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] placeholder:text-[#9CA3AF]"
                               min="1"
                             />
                           ) : (
@@ -791,8 +791,8 @@ export default function TradeCheckPage() {
                                   onClick={() => setQuestionnaire(prev => ({ ...prev, [item.key]: opt }))}
                                   className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
                                     questionnaire[item.key] === opt
-                                      ? 'bg-gradient-to-r from-[#059669] to-[#10B981] text-white shadow-md'
-                                      : 'bg-white border border-[rgba(5,150,105,0.2)] text-[#4B5563] hover:border-[#059669] hover:text-[#059669]'
+                                      ? 'bg-gradient-to-r from-primary to-primary/60 text-white shadow-md'
+                                      : 'bg-white border border-border text-[#4B5563] hover:border-[var(--primary)] hover:text-primary'
                                   }`}
                                 >
                                   {opt}
@@ -811,7 +811,7 @@ export default function TradeCheckPage() {
                   <div className="flex justify-center pt-4">
                     <button
                       type="submit"
-                      className="inline-flex items-center justify-center gap-2 px-10 py-4 rounded-xl bg-gradient-to-r from-[#059669] to-[#10B981] text-white font-semibold hover:shadow-[0_0_28px_rgba(5,150,105,0.35)] transition-all hover:scale-105 min-w-[240px] text-base cursor-pointer shadow-md"
+                      className="inline-flex items-center justify-center gap-2 px-10 py-4 rounded-xl bg-gradient-to-r from-primary to-primary/60 text-white font-semibold hover:shadow-[0_0_28px_rgba(5,150,105,0.35)] transition-all hover:scale-105 min-w-[240px] text-base cursor-pointer shadow-md"
                     >
                       <Zap className="w-5 h-5" />
                       Analyze My Trades
@@ -835,8 +835,8 @@ export default function TradeCheckPage() {
             >
               {/* Success banner */}
               {!emailSubmitted ? (
-                <div className="glass-card rounded-2xl p-6 flex flex-col md:flex-row items-center gap-4 border-l-4 border-[#059669]">
-                  <CheckCircle className="w-8 h-8 text-[#059669] flex-shrink-0" />
+                <div className="glass-card rounded-2xl p-6 flex flex-col md:flex-row items-center gap-4 border-l-4 border-[var(--primary)]">
+                  <CheckCircle className="w-8 h-8 text-primary flex-shrink-0" />
                   <div className="flex-1 text-center md:text-left">
                     <h2 className="text-lg font-bold text-[#111827]">Analysis Complete</h2>
                     <p className="text-sm text-[#4B5563]">Your report is generated. Enter your email to download the PDF and save your results.</p>
@@ -848,13 +848,13 @@ export default function TradeCheckPage() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Enter your email"
-                      className="w-full md:w-64 px-4 py-2.5 rounded-xl bg-white border border-[rgba(5,150,105,0.2)] text-[#111827] focus:outline-none focus:ring-2 focus:ring-[#059669] placeholder:text-[#9CA3AF] text-sm"
+                      className="w-full md:w-64 px-4 py-2.5 rounded-xl bg-white border border-border text-[#111827] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] placeholder:text-[#9CA3AF] text-sm"
                       required
                     />
                     <button
                       type="submit"
                       disabled={sendingEmail}
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#059669] to-[#10B981] text-white font-semibold hover:shadow-[0_0_20px_rgba(5,150,105,0.3)] transition-all hover:scale-105 text-sm whitespace-nowrap cursor-pointer disabled:opacity-50"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-primary to-primary/60 text-white font-semibold hover:shadow-[0_0_20px_rgba(5,150,105,0.3)] transition-all hover:scale-105 text-sm whitespace-nowrap cursor-pointer disabled:opacity-50"
                     >
                       {sendingEmail ? (
                         <Loader className="w-4 h-4 animate-spin" />
@@ -866,15 +866,15 @@ export default function TradeCheckPage() {
                   </form>
                 </div>
               ) : (
-                <div className="glass-card rounded-2xl p-6 flex items-center gap-4 border-l-4 border-[#059669]">
-                  <CheckCircle className="w-8 h-8 text-[#059669] flex-shrink-0" />
+                <div className="glass-card rounded-2xl p-6 flex items-center gap-4 border-l-4 border-[var(--primary)]">
+                  <CheckCircle className="w-8 h-8 text-primary flex-shrink-0" />
                   <div className="flex-1">
                     <h2 className="text-lg font-bold text-[#111827]">Analysis Complete</h2>
                     <p className="text-sm text-[#4B5563]">Your report has been sent to {email}. You can download the PDF below.</p>
                   </div>
                   <button
                     onClick={handleDownloadPDF}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#059669] to-[#10B981] text-white font-medium hover:shadow-[0_0_20px_rgba(5,150,105,0.3)] transition-all hover:scale-105 text-sm cursor-pointer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-primary to-primary/60 text-white font-medium hover:shadow-[0_0_20px_rgba(5,150,105,0.3)] transition-all hover:scale-105 text-sm cursor-pointer"
                   >
                     <Download className="w-4 h-4" />
                     Download PDF
@@ -886,7 +886,7 @@ export default function TradeCheckPage() {
               <FadeIn delay={0.1}>
                 <div className="glass-card rounded-2xl p-8">
                   <div className="flex items-center gap-3 mb-6">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#059669] to-[#10B981] flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center">
                       <BarChart3 className="w-5 h-5 text-white" />
                     </div>
                     <h2 className="text-xl font-bold text-[#111827]">Performance Statistics</h2>
@@ -912,7 +912,7 @@ export default function TradeCheckPage() {
                   </div>
 
                   {result.stats.instrumentsTraded?.length > 0 && (
-                    <div className="mt-4 pt-4 border-t border-[rgba(5,150,105,0.1)]">
+                    <div className="mt-4 pt-4 border-t border-border">
                       <p className="text-sm text-[#6B7280]">
                         <span className="font-medium text-[#111827]">Instruments traded:</span>{' '}
                         {result.stats.instrumentsTraded.join(', ')}
@@ -926,7 +926,7 @@ export default function TradeCheckPage() {
               <FadeIn delay={0.2}>
                 <div className="glass-card rounded-2xl p-8">
                   <div className="flex items-center gap-3 mb-6">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#059669] to-[#10B981] flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center">
                       <Brain className="w-5 h-5 text-white" />
                     </div>
                     <h2 className="text-xl font-bold text-[#111827]">AI Risk Analysis</h2>
@@ -939,7 +939,7 @@ export default function TradeCheckPage() {
                         if (line.match(/^\d+\.\s/) || line.match(/^#+\s/) || line.match(/^\*\*\d+\./)) {
                           const cleanLine = line.replace(/^#+\s/, '').replace(/^\*\*/,'').replace(/\*\*$/,'');
                           return (
-                            <h3 key={i} className="text-base font-bold text-[#059669] mt-6 mb-2 flex items-center gap-2">
+                            <h3 key={i} className="text-base font-bold text-primary mt-6 mb-2 flex items-center gap-2">
                               {cleanLine}
                             </h3>
                           );
@@ -954,14 +954,14 @@ export default function TradeCheckPage() {
                       <div className="space-y-6">
                         {/* Overall Verdict */}
                         {result.analysis.overallVerdict && (
-                          <div className="p-4 rounded-xl bg-[rgba(5,150,105,0.06)] border border-[rgba(5,150,105,0.15)]">
+                          <div className="p-4 rounded-xl bg-primary/10 border border-border">
                             <p className="text-[#374151] leading-relaxed font-medium">{result.analysis.overallVerdict}</p>
                           </div>
                         )}
 
                         {/* Sections */}
                         {Array.isArray(result.analysis.sections) && result.analysis.sections.map((section: { id?: string; title?: string; severity?: string; score?: number; summary?: string; detail?: string }, idx: number) => {
-                          const severityColor = section.severity === 'good' ? 'text-emerald-600 bg-emerald-50 border-emerald-200'
+                          const severityColor = section.severity === 'good' ? 'text-primary bg-primary/10 border-primary/20'
                             : section.severity === 'warning' ? 'text-amber-600 bg-amber-50 border-amber-200'
                             : section.severity === 'critical' ? 'text-red-600 bg-red-50 border-red-200'
                             : 'text-blue-600 bg-blue-50 border-blue-200';
@@ -975,7 +975,7 @@ export default function TradeCheckPage() {
                                 <h3 className="text-base font-bold text-[#111827]">{section.title}</h3>
                                 <div className="flex items-center gap-2">
                                   {section.score != null && (
-                                    <span className="text-sm font-bold text-[#059669]">{section.score}/100</span>
+                                    <span className="text-sm font-bold text-primary">{section.score}/100</span>
                                   )}
                                   <span className={`text-xs font-semibold px-2 py-0.5 rounded-full border ${severityColor}`}>
                                     {severityLabel}
@@ -1001,10 +1001,10 @@ export default function TradeCheckPage() {
               <FadeIn delay={0.3}>
                 <div className="relative rounded-2xl overflow-hidden">
                   {/* Background gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#047857] via-[#059669] to-[#10B981] opacity-[0.07]" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary via-[var(--primary)] to-primary/60 opacity-[0.07]" />
                   <div className="glass-card rounded-2xl p-10 relative">
                     <div className="text-center max-w-2xl mx-auto">
-                      <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#059669] to-[#10B981] flex items-center justify-center mx-auto mb-5">
+                      <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center mx-auto mb-5">
                         <TrendingUp className="w-7 h-7 text-white" />
                       </div>
                       <h2 className="text-2xl md:text-3xl font-bold text-[#111827] mb-3">
@@ -1021,7 +1021,7 @@ export default function TradeCheckPage() {
                           href="https://t.me/paisanomics"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#059669] to-[#10B981] text-white font-semibold hover:shadow-[0_0_28px_rgba(5,150,105,0.35)] transition-all hover:scale-105"
+                          className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-primary to-primary/60 text-white font-semibold hover:shadow-[0_0_28px_rgba(5,150,105,0.35)] transition-all hover:scale-105"
                         >
                           <MessageCircle className="w-5 h-5" />
                           Chat with us on Telegram
@@ -1029,10 +1029,10 @@ export default function TradeCheckPage() {
                       </div>
 
                       {/* Booking Form */}
-                      <div className="border-t border-[rgba(5,150,105,0.15)] pt-8">
+                      <div className="border-t border-border pt-8">
                         <h3 className="text-lg font-bold text-[#111827] mb-4">Book a Pro Audit</h3>
                         {bookingSubmitted ? (
-                          <div className="flex items-center justify-center gap-2 p-4 rounded-xl bg-[rgba(5,150,105,0.08)] text-[#059669]">
+                          <div className="flex items-center justify-center gap-2 p-4 rounded-xl bg-primary/10 text-primary">
                             <CheckCircle className="w-5 h-5" />
                             <span className="font-medium">Request received! We&apos;ll be in touch within 24 hours.</span>
                           </div>
@@ -1043,14 +1043,14 @@ export default function TradeCheckPage() {
                               value={bookingEmail}
                               onChange={(e) => setBookingEmail(e.target.value)}
                               placeholder="Your email"
-                              className="w-full px-4 py-3 rounded-xl bg-white border border-[rgba(5,150,105,0.2)] text-[#111827] focus:outline-none focus:ring-2 focus:ring-[#059669] placeholder:text-[#9CA3AF]"
+                              className="w-full px-4 py-3 rounded-xl bg-white border border-border text-[#111827] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] placeholder:text-[#9CA3AF]"
                               required
                             />
                             <div className="relative">
                               <select
                                 value={bookingContact}
                                 onChange={(e) => setBookingContact(e.target.value)}
-                                className="w-full px-4 py-3 rounded-xl bg-white border border-[rgba(5,150,105,0.2)] text-[#111827] focus:outline-none focus:ring-2 focus:ring-[#059669] appearance-none cursor-pointer"
+                                className="w-full px-4 py-3 rounded-xl bg-white border border-border text-[#111827] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] appearance-none cursor-pointer"
                                 required
                               >
                                 <option value="">Preferred contact method...</option>
@@ -1065,12 +1065,12 @@ export default function TradeCheckPage() {
                               onChange={(e) => setBookingNote(e.target.value)}
                               placeholder="Brief note (optional) — e.g. what you'd like reviewed"
                               rows={3}
-                              className="w-full px-4 py-3 rounded-xl bg-white border border-[rgba(5,150,105,0.2)] text-[#111827] focus:outline-none focus:ring-2 focus:ring-[#059669] placeholder:text-[#9CA3AF] resize-none"
+                              className="w-full px-4 py-3 rounded-xl bg-white border border-border text-[#111827] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] placeholder:text-[#9CA3AF] resize-none"
                             />
                             <button
                               type="submit"
                               disabled={bookingLoading}
-                              className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[rgba(5,150,105,0.08)] text-[#059669] font-semibold border border-[rgba(5,150,105,0.2)] hover:bg-[rgba(5,150,105,0.15)] transition-all disabled:opacity-50"
+                              className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary/10 text-primary font-semibold border border-border hover:bg-primary/10 transition-all disabled:opacity-50"
                             >
                               {bookingLoading ? (
                                 <Loader className="w-4 h-4 animate-spin" />
@@ -1104,7 +1104,7 @@ export default function TradeCheckPage() {
                 <p className="text-[#4B5563] mb-6">{errorMessage || 'An unexpected error occurred.'}</p>
                 <button
                   onClick={() => { setPageState('form'); setErrorMessage(''); }}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-[#059669] to-[#10B981] text-white font-semibold hover:shadow-[0_0_28px_rgba(5,150,105,0.35)] transition-all"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-primary to-primary/60 text-white font-semibold hover:shadow-[0_0_28px_rgba(5,150,105,0.35)] transition-all"
                 >
                   <ArrowLeft className="w-4 h-4" />
                   Try Again
@@ -1134,13 +1134,13 @@ export default function TradeCheckPage() {
               >
                 <button
                   onClick={() => setShowFreeTrialPopup(false)}
-                  className="absolute top-4 right-4 text-[#6B7280] hover:text-[#059669] transition-colors cursor-pointer"
+                  className="absolute top-4 right-4 text-[#6B7280] hover:text-primary transition-colors cursor-pointer"
                 >
                   <X className="w-5 h-5" />
                 </button>
                 <div className="text-center">
-                  <div className="w-16 h-16 rounded-full bg-[rgba(5,150,105,0.08)] border border-[rgba(5,150,105,0.15)] flex items-center justify-center mx-auto mb-5">
-                    <CheckCircle className="w-8 h-8 text-[#059669]" />
+                  <div className="w-16 h-16 rounded-full bg-primary/10 border border-border flex items-center justify-center mx-auto mb-5">
+                    <CheckCircle className="w-8 h-8 text-primary" />
                   </div>
                   <h3 className="text-xl font-bold text-[#111827] mb-2">Report generated!</h3>
                   <p className="text-sm text-[#4B5563] mb-1">
@@ -1151,13 +1151,13 @@ export default function TradeCheckPage() {
                   </p>
                   <div className="flex flex-col gap-3">
                     <Link href="/pricing">
-                      <button className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-[#059669] to-[#10B981] text-white font-semibold hover:shadow-[0_0_20px_rgba(5,150,105,0.3)] transition-all hover:scale-105 cursor-pointer">
+                      <button className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-primary to-primary/60 text-white font-semibold hover:shadow-[0_0_20px_rgba(5,150,105,0.3)] transition-all hover:scale-105 cursor-pointer">
                         View Pricing Plans
                       </button>
                     </Link>
                     <button
                       onClick={() => setShowFreeTrialPopup(false)}
-                      className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-[rgba(5,150,105,0.2)] bg-[rgba(5,150,105,0.04)] text-[#059669] font-medium hover:bg-[rgba(5,150,105,0.08)] transition-all text-sm cursor-pointer"
+                      className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-border bg-primary/10 text-primary font-medium hover:bg-primary/10 transition-all text-sm cursor-pointer"
                     >
                       Continue Viewing Report
                     </button>
@@ -1180,10 +1180,10 @@ function StatCard({ label, value, highlight, danger }: {
   danger?: boolean;
 }) {
   return (
-    <div className="p-4 rounded-xl bg-white/80 border border-[rgba(5,150,105,0.1)] hover:border-[rgba(5,150,105,0.25)] transition-all">
+    <div className="p-4 rounded-xl bg-white/80 border border-border hover:border-border transition-all">
       <p className="text-xs text-[#6B7280] mb-1">{label}</p>
       <p className={`text-lg font-bold ${
-        danger ? 'text-red-600' : highlight ? 'text-[#059669]' : 'text-[#111827]'
+        danger ? 'text-red-600' : highlight ? 'text-primary' : 'text-[#111827]'
       }`}>
         {value}
       </p>

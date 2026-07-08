@@ -109,7 +109,7 @@ export function HeroSection() {
                 >
                   <p className="text-xs text-muted-foreground mb-2">Capital Routing</p>
                   <div className="space-y-2 text-sm">
-                    <div className="flex justify-between"><span>FTMO Funded</span><span className="font-semibold text-emerald-600">+1.9R</span></div>
+                    <div className="flex justify-between"><span>FTMO Funded</span><span className="font-semibold text-primary">+1.9R</span></div>
                     <div className="flex justify-between"><span>Eval Group</span><span className="font-semibold text-rose-600">-0.6R</span></div>
                     <div className="h-px bg-border my-2" />
                     <div className="text-xs text-muted-foreground">Suggestion: scale risk on FTMO NY continuation setups.</div>
