@@ -1,0 +1,78 @@
+{
+  "email": "",
+  "ip": "::ffff:127.0.0.1",
+  "timestamp": "2026-07-08T05:59:08.288Z",
+  "accountContext": {
+    "firmName": "The5%ers",
+    "phase": "Funded",
+    "accountSize": 4444,
+    "maxDailyLossPercent": 4,
+    "maxDrawdownPercent": 6,
+    "profitTargetPercent": 6
+  },
+  "questionnaire": {
+    "moveStopLoss": "Often",
+    "increaseSizeAfterWin": "No",
+    "reenterAfterLoss": "Yes",
+    "maxTradesPerDay": "4",
+    "setupConsistency": "Improvise",
+    "useJournal": "Basic notes",
+    "tradeDuringNews": "Always",
+    "holdOvernight": "Occasionally"
+  },
+  "stats": {
+    "totalTrades": 300,
+    "winningTrades": 204,
+    "losingTrades": 96,
+    "winRate": 68,
+    "averageWin": 175.04240196078413,
+    "averageLoss": -79.76270833333334,
+    "averageRR": 2.1945393482537106,
+    "maxSingleDayLoss": 0,
+    "maxSingleDayLossDate": "",
+    "daysWithin10PercentOfDailyLimit": 0,
+    "lotSizeVarianceWins": 0.4623413986284175,
+    "lotSizeVarianceLosses": 0.375094736842105,
+    "avgLotSizeWins": 0.5306862745098039,
+    "avgLotSizeLosses": 0.4150000000000003,
+    "avgTimeGapAfterLoss": 5.75,
+    "tradesPerDayAvg": 100,
+    "tradesPerDayMax": 133,
+    "tradesPerDayMaxDate": "2026-05-16",
+    "totalPnl": 28051.43,
+    "largestWin": 348.78,
+    "largestLoss": -178.74,
+    "profitFactor": 4.663396115039135,
+    "tradingDays": 3,
+    "instrumentsTraded": [
+      "EURUSD",
+      "AUDUSD",
+      "USDJPY",
+      "NAS100",
+      "XAUUSD",
+      "GBPUSD"
+    ],
+    "longestWinStreak": 9,
+    "longestLoseStreak": 4,
+    "pnlSeries": [
+      {
+        "date": "2026-05-15",
+        "dailyPnl": 9106.419999999998,
+        "cumulativePnl": 9106.419999999998
+      },
+      {
+        "date": "2026-05-16",
+        "dailyPnl": 13102.19,
+        "cumulativePnl": 22208.61
+      },
+      {
+        "date": "2026-05-17",
+        "dailyPnl": 5842.820000000002,
+        "cumulativePnl": 28051.430000000004
+      }
+    ]
+  },
+  "llmResponse": "{\n  \"overallScore\": 72,\n  \"overallVerdict\": \"You're managing risk well with a 68% win rate, but overtrading is a concern with 100 trades per day on average.\",\n  \"sections\": [\n    {\n      \"id\": \"risk_management\",\n      \"title\": \"Risk Management & Position Sizing\",\n      \"severity\": \"good\",\n      \"score\": 85,\n      \"summary\": \"Risk well managed\",\n      \"detail\": \"You risked an average of $79.76 per trade, with a maximum daily loss limit of $177.76, which you never exceeded. Your average risk-reward ratio is 2.19, indicating a good balance between risk and potential reward.\"\n    },\n    {\n      \"id\": \"prop_firm_compliance\",\n      \"title\": \"Prop Firm Compliance\",\n      \"severity\": \"good\",\n      \"score\": 90,\n      \"summary\": \"Compliant with firm rules\",\n      \"detail\": \"You were within 0% of your daily loss limit on all trading days, and your maximum drawdown was well below the 6% limit set by The5%ers. This suggests you're managing your account size and risk effectively.\"\n    },\n    {\n      \"id\": \"win_rate_expectancy\",\n      \"title\": \"Win Rate & Expectancy\",\n      \"severity\": \"good\",\n      \"score\": 80,\n      \"summary\": \"Sustainable expectancy\",\n      \"detail\": \"Your 68% win rate, combined with an average win of $175.04 and an average loss of $79.76, results in a positive expectancy of $93.51 per trade. This is mathematically sustainable and indicates a well-performing trading strategy.\"\n    },\n    {\n      \"id\": \"lot_size_consistency\",\n      \"title\": \"Lot Size Consistency\",\n      \"severity\": \"warning\",\n      \"score\": 50,\n      \"summary\": \"Inconsistent lot sizing\",\n      \"detail\": \"You said you don't increase size after a win, but your average lot size on wins is 0.53, compared to 0.42 on losses. This suggests some inconsistency in your lot sizing, which may impact your risk management.\"\n    },\n    {\n      \"id\": \"trade_timing\",\n      \"title\": \"Trade Timing & Overtrading\",\n      \"severity\": \"danger\",\n      \"score\": 20,\n      \"summary\": \"Overtrading detected\",\n      \"detail\": \"You averaged 100 trades per day, with a maximum of 133 trades on a single day. This high trade frequency, combined with an average of only 5.8 minutes between trades after a loss, indicates overtrading and potentially impulsive decision-making.\"\n    },\n    {\n      \"id\": \"behavioral_flags\",\n      \"title\": \"Behavioral Red Flags\",\n      \"severity\": \"warning\",\n      \"score\": 60,\n      \"summary\": \"Re-entry after loss\",\n      \"detail\": \"You reported re-entering trades after a loss, which can lead to impulsive decisions and increased risk. This behavior, combined with your high trade frequency, is a concern and may impact your long-term performance.\"\n    },\n    {\n      \"id\": \"drawdown_recovery\",\n      \"title\": \"Drawdown Recovery\",\n      \"severity\": \"info\",\n      \"score\": null,\n      \"summary\": \"Insufficient data\",\n      \"detail\": \"With only 3 trading days in the data, it's difficult to assess your drawdown recovery. More data is needed to evaluate your ability to recover from losses.\"\n    },\n    {\n      \"id\": \"discipline\",\n      \"title\": \"Discipline vs Strategy\",\n      \"severity\": \"warning\",\n      \"score\": 40,\n      \"summary\": \"Inconsistent strategy\",\n      \"detail\": \"You reported improvising your trading setup, which may lead to inconsistent results. This lack of discipline, combined with your high trade frequency and re-entry after loss behavior, raises concerns about your ability to stick to a strategy.\"\n    },\n    {\n      \"id\": \"recommendations\",\n      \"title\": \"Key Recommendation\",\n      \"severity\": \"info\",\n      \"score\": null,\n      \"summary\": \"Reduce trades per day\",\n      \"detail\": \"Based on your high trade frequency, it's recommended that you reduce your average trades per day to 20 or fewer. This will help you avoid overtrading and potentially impulsive decision-making, allowing you to focus on higher-quality trades.\"\n    },\n    {\n      \"id\": \"readiness_score\",\n      \"title\": \"Payout Readiness\",\n      \"severity\": \"good\",\n      \"score\": 80,\n      \"summary\": \"Ready for payout\",\n      \"detail\": \"Your overall performance, combined with your compliance with The5%ers' rules, suggests you're ready for a payout. However, it's essential to continue monitoring your performance and addressing areas of concern, such as overtrading and inconsistent lot sizing.\"\n    }\n  ]\n}",
+  "provider": "groq",
+  "keyIndex": 0
+}
