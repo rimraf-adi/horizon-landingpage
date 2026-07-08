@@ -32,7 +32,7 @@ export interface ComputedStats {
   lotSizeVarianceLosses: number;
   avgLotSizeWins: number;
   avgLotSizeLosses: number;
-  avgTimeGapAfterLoss: number;
+  avgTimeGapAfterLoss: number; // minutes
   tradesPerDayAvg: number;
   tradesPerDayMax: number;
   tradesPerDayMaxDate: string;
@@ -44,9 +44,9 @@ export interface ComputedStats {
   instrumentsTraded: string[];
   longestWinStreak: number;
   longestLoseStreak: number;
-  pnlSeries: { date: string; dailyPnl: number; cumulativePnl: number }[];
 }
 
+// Auto-detect CSV format and parse
 export function parseTradeCSV(csvContent: string): ParsedTrade[] {
   const lines = csvContent.trim().split('\n');
   if (lines.length < 2) {
@@ -56,6 +56,7 @@ export function parseTradeCSV(csvContent: string): ParsedTrade[] {
   const headerLine = lines[0].trim();
   const headers = parseCSVLine(headerLine).map(h => h.toLowerCase().trim());
 
+  // Detect format
   const format = detectFormat(headers);
   const trades: ParsedTrade[] = [];
 
@@ -68,6 +69,7 @@ export function parseTradeCSV(csvContent: string): ParsedTrade[] {
       const trade = parseTradeLine(headers, values, format);
       if (trade) trades.push(trade);
     } catch {
+      // Skip malformed rows silently
       continue;
     }
   }
@@ -104,14 +106,17 @@ type CSVFormat = 'mt4' | 'mt5' | 'ctrader' | 'generic';
 function detectFormat(headers: string[]): CSVFormat {
   const headerStr = headers.join(' ');
 
+  // MT4: "ticket", "open time", "type", "size", "item", "price", "s / l", "t / p", "close time", "price", "commission", "taxes", "swap", "profit"
   if (headerStr.includes('ticket') && headerStr.includes('item') && headerStr.includes('swap')) {
     return 'mt4';
   }
 
+  // MT5: "position", "symbol", "type", "volume", "price", "s/l", "t/p", "time", "commission", "fee", "swap", "profit"
   if (headerStr.includes('position') && headerStr.includes('symbol') && headerStr.includes('volume')) {
     return 'mt5';
   }
 
+  // cTrader: "position id", "symbol", "direction", "volume", "entry price", "close price", "profit"
   if (headerStr.includes('direction') && headerStr.includes('entry') && headerStr.includes('close')) {
     return 'ctrader';
   }
@@ -138,8 +143,10 @@ function parseTradeLine(headers: string[], values: string[], format: CSVFormat):
 
   const parseDate = (val: string): Date => {
     if (!val) return new Date();
+    // Try multiple date formats
     const d = new Date(val);
     if (!isNaN(d.getTime())) return d;
+    // MT4/MT5 format: "2024.01.15 10:30:00"
     const dotFormat = val.replace(/\./g, '-');
     const d2 = new Date(dotFormat);
     if (!isNaN(d2.getTime())) return d2;
@@ -150,6 +157,7 @@ function parseTradeLine(headers: string[], values: string[], format: CSVFormat):
 
   if (format === 'mt4') {
     const type = getVal(['type']).toLowerCase();
+    // Skip non-trade rows (balance, credit, etc.)
     if (!type.includes('buy') && !type.includes('sell')) return null;
 
     trade = {
@@ -195,14 +203,16 @@ function parseTradeLine(headers: string[], values: string[], format: CSVFormat):
       pnl: parseNum(getVal(['profit', 'p/l', 'pnl', 'net profit'])),
     };
   } else {
+    // Generic: try to find common columns
     const dir = getVal(['direction', 'side', 'type', 'action']).toLowerCase();
     const isBuy = dir.includes('buy') || dir.includes('long');
     const isSell = dir.includes('sell') || dir.includes('short');
     if (!isBuy && !isSell) {
+      // Try to infer from P&L + prices
       const pnl = parseNum(getVal(['profit', 'p/l', 'pnl', 'net profit', 'result']));
       trade = {
         instrument: getVal(['symbol', 'instrument', 'pair', 'item', 'asset']),
-        direction: pnl >= 0 ? 'BUY' : 'BUY',
+        direction: pnl >= 0 ? 'BUY' : 'BUY', // default, doesn't affect stats
         entryPrice: parseNum(getVal(['entry', 'open price', 'entry price', 'price'])),
         exitPrice: parseNum(getVal(['exit', 'close price', 'exit price'])),
         lotSize: parseNum(getVal(['volume', 'lots', 'size', 'quantity', 'lot'])),
@@ -224,6 +234,7 @@ function parseTradeLine(headers: string[], values: string[], format: CSVFormat):
     }
   }
 
+  // Validate: must have at least a P&L
   if (trade && trade.pnl === 0 && trade.entryPrice === 0 && trade.exitPrice === 0) {
     return null;
   }
@@ -231,6 +242,7 @@ function parseTradeLine(headers: string[], values: string[], format: CSVFormat):
   return trade;
 }
 
+// Compute all hard stats from parsed trades
 export function computeStats(
   trades: ParsedTrade[],
   accountRules: {
@@ -242,6 +254,7 @@ export function computeStats(
   const wins = trades.filter(t => t.pnl > 0);
   const losses = trades.filter(t => t.pnl <= 0);
 
+  // Group trades by date
   const tradesByDay = new Map<string, ParsedTrade[]>();
   for (const trade of trades) {
     const dateKey = trade.closeTime.toISOString().split('T')[0];
@@ -249,6 +262,7 @@ export function computeStats(
     tradesByDay.get(dateKey)!.push(trade);
   }
 
+  // Max single-day loss
   let maxSingleDayLoss = 0;
   let maxSingleDayLossDate = '';
   const dailyLossLimit = (accountRules.maxDailyLossPercent / 100) * accountRules.accountSize;
@@ -260,27 +274,13 @@ export function computeStats(
       maxSingleDayLoss = dayPnl;
       maxSingleDayLossDate = date;
     }
+    // Check if within 10% of daily loss limit
     if (dailyLossLimit > 0 && Math.abs(dayPnl) >= dailyLossLimit * 0.9 && dayPnl < 0) {
       daysWithin10Percent++;
     }
   }
 
-  // Calculate pnlSeries
-  const pnlSeries: { date: string; dailyPnl: number; cumulativePnl: number }[] = [];
-  let cumulativePnl = 0;
-  // Sort dates
-  const sortedDates = Array.from(tradesByDay.keys()).sort();
-  for (const date of sortedDates) {
-    const dayTrades = tradesByDay.get(date)!;
-    const dailyPnl = dayTrades.reduce((sum, t) => sum + t.pnl, 0);
-    cumulativePnl += dailyPnl;
-    pnlSeries.push({
-      date,
-      dailyPnl,
-      cumulativePnl
-    });
-  }
-
+  // Lot size variance for wins vs losses
   const winLots = wins.map(t => t.lotSize).filter(l => l > 0);
   const lossLots = losses.map(t => t.lotSize).filter(l => l > 0);
   const avgLotWins = winLots.length > 0 ? winLots.reduce((a, b) => a + b, 0) / winLots.length : 0;
@@ -292,19 +292,21 @@ export function computeStats(
     ? lossLots.reduce((sum, l) => sum + Math.pow(l - avgLotLosses, 2), 0) / (lossLots.length - 1)
     : 0;
 
+  // Average time gap after a loss (in minutes)
   const sortedTrades = [...trades].sort((a, b) => a.closeTime.getTime() - b.closeTime.getTime());
   let totalGapAfterLoss = 0;
   let gapCount = 0;
   for (let i = 0; i < sortedTrades.length - 1; i++) {
     if (sortedTrades[i].pnl <= 0) {
       const gap = (sortedTrades[i + 1].openTime.getTime() - sortedTrades[i].closeTime.getTime()) / (1000 * 60);
-      if (gap >= 0 && gap < 60 * 24 * 7) {
+      if (gap >= 0 && gap < 60 * 24 * 7) { // Ignore gaps > 7 days
         totalGapAfterLoss += gap;
         gapCount++;
       }
     }
   }
 
+  // Trades per day stats
   const tradeCountsByDay = Array.from(tradesByDay.values()).map(t => t.length);
   const maxTradesPerDay = Math.max(...tradeCountsByDay, 0);
   let maxTradesPerDayDate = '';
@@ -315,6 +317,7 @@ export function computeStats(
     }
   }
 
+  // Win/loss streaks
   let currentStreak = 0;
   let longestWinStreak = 0;
   let longestLoseStreak = 0;
@@ -332,14 +335,17 @@ export function computeStats(
     if (result === 'loss' && currentStreak > longestLoseStreak) longestLoseStreak = currentStreak;
   }
 
+  // Average R:R
   const avgWin = wins.length > 0 ? wins.reduce((s, t) => s + t.pnl, 0) / wins.length : 0;
   const avgLoss = losses.length > 0 ? Math.abs(losses.reduce((s, t) => s + t.pnl, 0) / losses.length) : 0;
   const avgRR = avgLoss > 0 ? avgWin / avgLoss : 0;
 
+  // Profit factor
   const grossProfit = wins.reduce((s, t) => s + t.pnl, 0);
   const grossLoss = Math.abs(losses.reduce((s, t) => s + t.pnl, 0));
   const profitFactor = grossLoss > 0 ? grossProfit / grossLoss : grossProfit > 0 ? Infinity : 0;
 
+  // Instruments traded
   const instruments = [...new Set(trades.map(t => t.instrument).filter(Boolean))];
 
   return {
@@ -369,10 +375,10 @@ export function computeStats(
     instrumentsTraded: instruments,
     longestWinStreak,
     longestLoseStreak,
-    pnlSeries,
   };
 }
 
+// Build the structured JSON to send to the LLM
 export function buildLLMPayload(
   stats: ComputedStats,
   accountContext: {

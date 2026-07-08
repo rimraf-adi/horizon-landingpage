@@ -1,26 +1,80 @@
+/**
+ * POST /api/trade-check/analyze
+ * 
+ * Self-contained analysis endpoint. No filesystem. No external LLM module.
+ * Uses Edge Runtime for 30s timeout on Vercel Hobby plan.
+ * Groq API call is inlined directly.
+ */
+
 import { NextRequest, NextResponse } from 'next/server';
 import { parseTradeCSV, computeStats, buildLLMPayload } from '@/lib/trade-analyzer';
-import { callLLM } from '@/lib/llm-client';
-import { storeSubmission, checkRateLimit, markIPUsed } from '@/lib/rate-limiter';
-import { sendAnalysisEmail } from '@/lib/email';
 
-export const maxDuration = 60;
+export const runtime = 'edge';
+
+const SYSTEM_PROMPT = `You are a high-level trading risk analyst and prop firm evaluator reviewing a trader's performance statistics and self-reported behavior. You are NOT given raw trade-by-trade data — only pre-computed summary statistics. Base every claim strictly on the structured data provided below. Never invent specific trades, dates, prices, or any figure not present in the input. If a stat is missing, say so rather than estimating it.
+
+Your goal is to provide a deeply insightful, detailed, and harsh but fair breakdown of why this trader might be struggling, why they might fail a prop firm challenge based on their current stats, and exactly what they need to change to secure a payout.
+
+Cross-reference the trader's self-reported behavior answers against the computed statistics, and explicitly call out any contradictions (e.g., they report never sizing up after wins, but lot size data shows otherwise). Check the computed statistics against the account rules provided (max daily loss %, max drawdown %) and heavily critique how close the trader has come to violating them.
+
+Write your response in exactly these sections, in this order:
+1. Overall Verdict (2-3 sentences summarizing their current standing)
+2. The Brutal Truth: Where You Are Going Wrong (2 detailed paragraphs breaking down their biggest mathematical and behavioral flaws based on the stats)
+3. Prop Firm Failure Risks (1-2 paragraphs explicitly stating why these habits will lead to failing a challenge or losing a funded account, referencing their drawdowns and risk metrics)
+4. Behavioral Contradictions (1 short paragraph identifying discrepancies between their self-reported behavior and the hard data)
+5. The Roadmap to a Payout (3-4 bullet points offering a highly specific, actionable, step-by-step plan for what they need to fix in their next trading week to become consistently profitable)
+
+Do not restate the raw stats as a bullet list — that will be shown separately in a table. Your job is synthesis, judgment, and deep guidance. Avoid generic filler; every sentence must tie back to their specific numbers, drawdowns, and behaviors.`;
+
+// Get all Groq keys from env (Edge runtime requires static access)
+function getGroqKeys(): string[] {
+  const keys = [
+    process.env.GROQ_API_KEY_0,
+    process.env.GROQ_API_KEY_1,
+    process.env.GROQ_API_KEY_2,
+    process.env.GROQ_API_KEY_3,
+    process.env.GROQ_API_KEY_4,
+    process.env.GROQ_API_KEY_5,
+    process.env.GROQ_API_KEY_6,
+    process.env.GROQ_API_KEY_7,
+    process.env.GROQ_API_KEY_8,
+    process.env.GROQ_API_KEY_9,
+  ];
+  return keys.filter(Boolean) as string[];
+}
+
+// Direct Groq API call
+async function callGroqDirect(payload: object, apiKey: string): Promise<string> {
+  const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${apiKey}`,
+    },
+    body: JSON.stringify({
+      model: 'llama-3.3-70b-versatile',
+      messages: [
+        { role: 'system', content: SYSTEM_PROMPT },
+        { role: 'user', content: `Here is the trader's data for analysis:\n\n${JSON.stringify(payload, null, 2)}` },
+      ],
+      temperature: 0.4,
+      max_tokens: 3000,
+    }),
+  });
+
+  if (!response.ok) {
+    const errText = await response.text();
+    throw new Error(`Groq ${response.status}: ${errText.substring(0, 200)}`);
+  }
+
+  const data = await response.json();
+  const content = data.choices?.[0]?.message?.content;
+  if (!content) throw new Error('Groq returned empty response');
+  return content;
+}
 
 export async function POST(request: NextRequest) {
   try {
-    // --- One-time use enforcement ---
-    const clientIP = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
-      || request.headers.get('x-real-ip')
-      || 'unknown';
-
-    const rateStatus = checkRateLimit('', clientIP);
-    if (rateStatus === 'ip_used') {
-      return NextResponse.json(
-        { error: 'You have already used your free analysis. Contact us for additional audits.' },
-        { status: 429 }
-      );
-    }
-
     const formData = await request.formData();
 
     const email = (formData.get('email') as string)?.trim().toLowerCase();
@@ -40,16 +94,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (email) {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-        return NextResponse.json(
-          { error: 'Please provide a valid email address.' },
-          { status: 400 }
-        );
-      }
-    }
-
     if (!csvFile) {
       return NextResponse.json(
         { error: 'Please upload your trade history CSV file.' },
@@ -57,129 +101,86 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Parse CSV
     let csvContent: string;
     try {
       csvContent = await csvFile.text();
     } catch {
-      return NextResponse.json(
-        { error: 'Could not read the uploaded file. Please ensure it\'s a valid CSV file.' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Could not read the uploaded file.' }, { status: 400 });
     }
 
     if (!csvContent.includes(',') && !csvContent.includes('\t') && !csvContent.includes(';')) {
-      return NextResponse.json(
-        { error: 'The uploaded file does not appear to be a valid CSV. Please export your trade history from MT4, MT5, or cTrader and try again.' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Not a valid CSV file.' }, { status: 400 });
     }
 
     let trades;
     try {
       trades = parseTradeCSV(csvContent);
-    } catch (parseError: any) {
-      return NextResponse.json(
-        { error: parseError.message || 'Failed to parse the CSV file. Please check the format and try again.' },
-        { status: 400 }
-      );
+    } catch (e: any) {
+      return NextResponse.json({ error: e.message || 'Failed to parse CSV.' }, { status: 400 });
     }
 
-    const accountRules = {
+    const stats = computeStats(trades, {
       maxDailyLossPercent: maxDailyLoss,
       maxDrawdownPercent: maxDrawdown,
-      accountSize: accountSize,
-    };
-
-    const stats = computeStats(trades, accountRules);
+      accountSize,
+    });
 
     let questionnaire: Record<string, string> = {};
-    try {
-      questionnaire = JSON.parse(questionnaireRaw || '{}');
-    } catch {
-      questionnaire = {};
-    }
+    try { questionnaire = JSON.parse(questionnaireRaw || '{}'); } catch { questionnaire = {}; }
 
-    const accountContext = {
-      firmName,
-      phase,
-      accountSize,
+    const llmPayload = buildLLMPayload(stats, {
+      firmName, phase, accountSize,
       maxDailyLossPercent: maxDailyLoss,
       maxDrawdownPercent: maxDrawdown,
       profitTargetPercent: profitTarget,
-    };
+    }, questionnaire);
 
-    const llmPayload = buildLLMPayload(stats, accountContext, questionnaire);
+    // Call Groq — try all keys round-robin
+    const groqKeys = getGroqKeys();
 
-    let llmResult;
-    try {
-      llmResult = await callLLM(llmPayload);
-    } catch (llmError: any) {
-      console.error('[Trade Check] LLM call failed:', llmError.message);
+    if (groqKeys.length === 0) {
       return NextResponse.json(
-        { error: 'Our analysis service is temporarily unavailable. Please try again in a few minutes.' },
+        { error: 'Server configuration error: No API keys found. Contact support.' },
+        { status: 500 }
+      );
+    }
+
+    const errors: string[] = [];
+    let analysis = '';
+    let usedProvider = '';
+    let usedKeyIndex = -1;
+
+    for (let i = 0; i < groqKeys.length; i++) {
+      try {
+        analysis = await callGroqDirect(llmPayload, groqKeys[i]);
+        usedProvider = 'groq';
+        usedKeyIndex = i;
+        break;
+      } catch (e: any) {
+        errors.push(`Key ${i}: ${e.message}`);
+        continue;
+      }
+    }
+
+    if (!analysis) {
+      // All Groq keys failed — return the actual errors for debugging
+      return NextResponse.json(
+        { error: `Analysis failed. Errors: ${errors.join(' | ')}` },
         { status: 503 }
       );
     }
 
-    // Parse structured JSON from LLM response
-    let parsedAnalysis: any;
-    try {
-      // Strip markdown code fences if the LLM wraps output
-      let cleanContent = llmResult.content.trim();
-      if (cleanContent.startsWith('```')) {
-        cleanContent = cleanContent.replace(/^```(?:json)?\s*\n?/, '').replace(/\n?```\s*$/, '');
-      }
-      parsedAnalysis = JSON.parse(cleanContent);
-    } catch {
-      // Fallback: wrap raw text in a single info section
-      console.warn('[Trade Check] LLM did not return valid JSON, falling back to raw text.');
-      parsedAnalysis = {
-        overallScore: null,
-        overallVerdict: '',
-        sections: [{
-          id: 'raw_analysis',
-          title: 'AI Risk Analysis',
-          severity: 'info',
-          score: null,
-          summary: 'Full analysis report',
-          detail: llmResult.content,
-        }],
-      };
-    }
-
-    // Mark this IP as used after successful analysis
-    markIPUsed(clientIP);
-
-    const timestamp = new Date().toISOString();
-    storeSubmission({
-      email,
-      ip: clientIP,
-      timestamp,
-      accountContext,
-      questionnaire,
-      stats,
-      llmResponse: llmResult.content,
-      provider: llmResult.provider,
-      keyIndex: llmResult.keyIndex,
-    });
-
-    if (email) {
-      sendAnalysisEmail(email, llmResult.content, stats).catch(err => {
-        console.error('[Trade Check] Failed to send email:', err);
-      });
-    }
-
     return NextResponse.json({
       success: true,
-      analysis: parsedAnalysis,
-      stats: stats,
-      provider: llmResult.provider,
+      analysis,
+      stats,
+      provider: usedProvider,
     });
 
   } catch (error: any) {
-    console.error('[Trade Check] Unexpected error:', error);
     return NextResponse.json(
-      { error: 'An unexpected error occurred. Please try again.' },
+      { error: `Unexpected error: ${error.message}` },
       { status: 500 }
     );
   }
